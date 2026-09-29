@@ -378,7 +378,7 @@
         </div>
         <div class="badges">
           <span class="internal-badge">内部学习使用</span>
-          <span class="ver-badge">住院医师版 v1.0</span>
+          <span class="ver-badge">住院医师版 v1.1</span>
         </div>
       </div>
       <div class="top-actions">
@@ -403,6 +403,7 @@
         <button class="ptab" onclick="goPage(12)">⑫ 对照·红线</button>
         <button class="ptab" onclick="goPage(13)">⑬ JHACH持续期</button>
         <button class="ptab" onclick="goPage(14)">⑭ JHACH早期</button>
+        <button class="ptab" onclick="goPage(15)">⑮ 补充·生理病因</button>
       </div>
     </nav>
   </div>
@@ -476,7 +477,7 @@
     </div>
   </div>
 
-  <div class="card-head"><h2>全书地图（14 页）</h2></div>
+  <div class="card-head"><h2>全书地图（15 页）</h2></div>
   <div class="formgrid">
     <div class="fcard"><div class="fh">② 判读</div><div class="fb">过渡期生理曲线 · 全球八口径阈值对照大表 · mmol↔mg/dL 换算带 · POCT 三坑 · 为什么持续期目标要 &gt;70。</div></div>
     <div class="fcard"><div class="fh">③ 筛查监测</div><div class="fb">高危儿名单 · 筛查时点与停测 · 本院监测频率两档 · 症状清单（神经组/自主神经组）。</div></div>
@@ -490,6 +491,7 @@
     <div class="fcard"><div class="fh">⑪ 剂量速查</div><div class="fb">全药物一张表：bolus / 凝胶 / 胰高糖素 / 二氮嗪 / 双克 / 奥曲肽 / 氢化可的松。</div></div>
     <div class="fcard"><div class="fh">⑫ 对照·红线</div><div class="fb">全球速查总表 · 本院 10 条差异清单 · 8 条床旁红线汇总。</div></div>
     <div class="fcard"><div class="fh">⑬⑭ JHACH 全文</div><div class="fb">《新生儿延长性/持续性低血糖路径》（2024）与《早期管理路径 CVICU》（2025）完整汉化，含 GRADE 表与关键化验期望值。</div></div>
+    <div class="fcard"><div class="fh">⑮ 补充·生理与病因</div><div class="fb">血糖调控最小生理知识集（三燃料一底盘、72h 切换、激素轴）＋ 病因图谱（三分法、指纹对照表、按时龄/诱因反推、局灶 vs 弥漫）。不含处置流程，处置查④–⑨。</div></div>
   </div>
 
   <div class="mnbar"><span class="mn-k">记忆</span>2.7 是诊断线，3.5–6.0 是目标带；有症状不喂等，先留血、再补糖。</div>
@@ -1254,7 +1256,7 @@
 
   <div class="purplebox">
     <div class="t">为什么病因学这么要紧：不是「查着玩」</div>
-    HI 患儿<b>神经发育迟缓发生率高达 30%–50%</b>——而且不只见于先天性 HI，暂时性原因所致 HI 同样高发。不同病因的治疗和随访完全不同：应激型等自愈、HI 型上药、垂体型激素替代、代谢病管饮食——<b>方向错了，越努力越错</b>。这就是第⑥页那六管标本值回票价的地方。
+    HI 患儿<b>神经发育迟缓发生率高达 30%–50%</b>——而且不只见于先天性 HI，暂时性原因所致 HI 同样高发。不同病因的治疗和随访完全不同：应激型等自愈、HI 型上药、垂体型激素替代、代谢病管饮食——<b>方向错了，越努力越错</b>。这就是第⑥页那六管标本值回票价的地方。<span class="xref" onclick="jump(15)">→ 第⑮页 病因图谱与指纹对照表</span>
   </div>
 
   <div class="mnbar"><span class="mn-k">记忆</span>应激型等自愈（药别抢跑），垂体型补激素（先 ACTH），代谢病管喂养（肝大想 GSD）。</div>
@@ -1628,9 +1630,143 @@
 
 </section>
 
+<!-- ================= 页15 补充：生理与病因 ================= -->
+<section class="card page doc" id="page15">
+
+  <div class="card-head"><span class="step-no purple">⑮</span><h2>补充：血糖生理最小知识集 · 病因图谱</h2></div>
+  <p class="card-sub">本页是「补充知识位」：<b>不承载任何处置流程</b>（处置永远看④–⑨），只回答两个背景问题——血糖是怎么被调控的（这套流程为什么长这样）、病因全景长什么样（查因时你到底在筛什么）。机制部分为标准教科书知识整理；病因谱在源手册基础上做了拓展（<span class="tag amber">⭐拓展</span>标注），引用前请科内确认。</p>
+
+  <div class="tealbox">
+    <div class="t">看懂本页，前面四件事全都有了「为什么」</div>
+    ①为什么阈值分两套——生后 72h 有一张固定的代谢切换时间表；②为什么查因先看<b>酮体和 FFA</b>——它们是「燃料开关」状态的直接读数；③为什么 HI 最伤脑——它是唯一「断供且无替代燃料」的低血糖；④为什么胰高糖素对 SGA 效果差——它要动员的肝糖原，SGA 根本没存上。
+  </div>
+
+  <h4>一、血糖从哪来：三种燃料 + 一个底盘</h4>
+  <div class="vargrid t2">
+    <div class="vartile d"><div class="vh">即刻：葡萄糖</div><div class="vq">胎儿经胎盘持续供糖（脐血糖≈母血糖的 2/3–80%）。<b>断脐＝断供</b>，此后只能靠外源喂养＋内源动员两条腿。</div></div>
+    <div class="vartile a"><div class="vh">短期：肝糖原</div><div class="vq">主要在<b>孕 28–36 周之后</b>才大量积攒（同时攒的还有脂肪）。生后数小时内被动用，是 12–24h 的主要内源糖。<b>早产儿 / SGA / IUGR 直接错过存储窗口</b>——「没存上钱」。</div></div>
+    <div class="vartile c"><div class="vh">替代：酮体（β-羟丁酸）</div><div class="vq">脂解 → 肝生酮。能穿过血脑屏障供脑——<b>脑不能直接烧脂肪酸</b>，酮体是低血糖时唯一的脑替代燃料。生后数小时启动。</div></div>
+    <div class="vartile e"><div class="vh">底盘：糖异生</div><div class="vq">乳酸 / 丙氨酸 / 甘油 → 葡萄糖。生后数小时启动，<b>酶系（PEPCK 等）数小时至数天才渐成熟</b>——持续供糖靠它，但新生儿这台底盘出厂时马力不足。</div></div>
+  </div>
+
+  <h4>二、生后 72 小时：一张固定的代谢切换时间表</h4>
+  <div class="tl">
+    <div class="tlrow"><span class="when">出生–1h</span><div class="what"><b>断脐＝断糖源</b>。血糖从母体约 2/3 水平下探，健康儿 1h 可低至 1.8 mmol/L——生理性，不是病。</div></div>
+    <div class="tlrow"><span class="when">1–6h</span><div class="what"><b>三线启动</b>：糖原分解＋糖异生＋脂解生酮同时拉起来，血糖开始回升。</div></div>
+    <div class="tlrow"><span class="when">12–24h</span><div class="what"><b>过渡期低位平台</b>，靠喂养＋自身调节维持 &gt;2.5–2.8。本院流程从 12h 起适用——正好接住过渡期里最需要干预的一段。</div></div>
+    <div class="tlrow"><span class="when">48–72h</span><div class="what">酶系统成熟＋喂养建立，全球的「过渡期阈值」到 72h 为止——<b>72h 后还降，就是病，两套阈值由此而来</b>。</div></div>
+    <div class="tlrow"><span class="when">第 4 天</span><div class="what">GLOW 研究新平台 <b>89±13 mg/dL</b>——「婴儿在第 4 天完成代谢过渡」。</div></div>
+  </div>
+  <p class="note">这就是 JHACH「<b>诊断性评估推迟到生后 2–3 天</b>」的依据：时间表走完之前，生理波动与病理状态根本无法区分。</p>
+
+  <h4>三、激素轴：一个刹车、四个油门</h4>
+  <div class="chain">
+    <span class="pill cold">血糖 ↓</span><span class="ar">→</span>
+    <span class="pill">胰岛素 ↓（&lt;85 mg/dL 即开始）</span><span class="ar">→</span>
+    <span class="pill hot">反调节激素 ↑（&lt;65 开始）</span><span class="ar">→</span>
+    <span class="pill grn">糖原分解↑ · 糖异生↑ · 脂解生酮↑</span>
+  </div>
+  <div class="bluebox">
+    <div class="t">角色表</div>
+    <b>唯一降糖激素＝胰岛素</b>（β 细胞）。<b>升糖四件套</b>：胰高糖素（α 细胞，生后 48h 内激增的主力）、肾上腺素（快反应，新生儿常掉链子）、皮质醇（允许性作用，没有它其他激素难起效）、生长激素（慢而持久）。低血糖时这套轴按「胰岛素先撤 → 油门依次踩下」的次序工作——⑥页期望值表里「&lt;85 / &lt;65」两个数字就是这两道闸门的刻度。
+  </div>
+  <div class="redbox">
+    <div class="t">HI 的本质：刹车失灵 → 三条生糖/生酮通路全被关死</div>
+    胰岛素不被抑制时：①糖原分解被关（胰岛素直接抑制）；②糖异生被关；③脂解＋生酮被关。<b>血糖低、酮体低、FFA 低</b>——全身唯一一种「没有任何替代燃料」的低血糖。这就是它最伤脑（神经发育迟缓 30%–50%）、也是判读表上「酮体 &lt;1.8 / FFA &lt;1.7」这两个「断供指纹」权重最高的原因。
+  </div>
+
+  <h4>四、为什么新生儿天生是「易低血糖体质」</h4>
+  <ul class="chk">
+    <li><b>存得少</b>：糖原靠孕晚期积攒——早产、SGA、IUGR 错过窗口，出生时「仓里没粮」；</li>
+    <li><b>造得慢</b>：糖异生酶系生后才逐渐成熟，底盘马力不足；</li>
+    <li><b>耗得快</b>：脑相对大、耗糖占比高；窒息、感染、低体温等应激再抬高消耗、压低摄入；</li>
+    <li><b>反应弱</b>：反调节反应（尤其肾上腺素反应）不成熟，交感症状隐匿——<b>所以靠按点筛查，不靠等症状</b>（第③页的策略依据）。</li>
+  </ul>
+
+  <h4>五、脑与酮体：保脑的第二燃料</h4>
+  <div class="whycard">
+    <span class="t">四个要点。</span>
+    ①脑不能直接氧化长链脂肪酸，低血糖时<b>酮体＋乳酸</b>是仅有的替代燃料；②生酮需要两个开关同时开：<b>脂解开（胰岛素低）＋肝生酮酶开</b>——HI 把两个都关了；③<b>母乳促生酮</b>（母乳脂质结构＋低胰岛素峰）——母乳优先的生理依据；④酮体阳性的低血糖＝身体已在自我保护，<b>提示不是 HI</b>——所以「酮体和 FFA 最诚实」，阴性反而危险。
+  </div>
+
+  <h4>六、病因图谱：三分法（产不出 · 刹不住 · 油门断）</h4>
+  <div class="tri">
+    <div class="tricard mid">
+      <div class="th">① 造不出（产糖/储备不足）</div>
+      <div class="bd"><ul>
+        <li><b>储备少</b>：早产、SGA / IUGR</li>
+        <li><b>糖原分解/糖异生坏</b>：糖原贮积病（乳酸↑＋肝大）</li>
+        <li><b>酮体造不出</b>：脂肪酸氧化缺陷（低酮＋FFA 高＝断联指纹）</li>
+        <li><b>底物断</b>：半乳糖血症<span class="tag amber">⭐拓展</span>等</li>
+      </ul></div>
+    </div>
+    <div class="tricard crit">
+      <div class="th">② 刹不住（胰岛素过多）</div>
+      <div class="bd"><ul>
+        <li><b>暂时性 HI</b>：IDM、围生期应激、母亲用药（拉贝洛尔/特布他林/口服降糖药）</li>
+        <li><b>先天 HI</b>：K-ATP 通道型（ABCC8/KCNJ11，最常见）；GDH 型（高氨-高胰岛素综合征）<span class="tag amber">⭐拓展</span>；BWS 综合征</li>
+        <li>指纹三联：<b>低酮＋低 FFA＋胰岛素不被抑制</b></li>
+      </ul></div>
+    </div>
+    <div class="tricard low">
+      <div class="th">③ 油门断（拮抗激素缺乏）</div>
+      <div class="bd"><ul>
+        <li><b>垂体-肾上腺轴</b>：皮质醇缺乏（&lt;10）、GH 缺乏（&lt;7）</li>
+        <li>皮质醇是「允许性油门」——缺它整条升糖轴软掉</li>
+        <li>线索：小阴茎、中线缺陷（唇腭裂）、黄疸延长</li>
+      </ul></div>
+    </div>
+  </div>
+  <p class="note">另有一类「外因型」：医源性（静脉糖骤停、采样/POCT 误差）与耗糖增加（败血症、低体温）——处理原发病＋复核测量，别急着进药物阶梯。</p>
+
+  <h4>七、病因指纹对照表（查因时对着勾）</h4>
+  <div class="tscroll">
+    <table class="slim">
+      <thead><tr><th>病因</th><th>典型时龄 / 诱因</th><th class="num">酮体</th><th class="num">FFA</th><th class="num">胰岛素</th><th class="num">乳酸</th><th class="num">血氨</th><th>其他指纹 / 线索</th></tr></thead>
+      <tbody>
+        <tr><td><b>过渡期生理</b></td><td>≤72h</td><td class="num">可阳性</td><td class="num">正常/可升</td><td class="num">被抑制</td><td class="num">正常</td><td class="num">正常</td><td>喂养能维持，不复发</td></tr>
+        <tr><td><b>IDM 暂时性 HI</b></td><td>≤48h</td><td class="num"><b>低</b></td><td class="num"><b>低</b></td><td class="num"><b>不被抑制</b></td><td class="num">正常</td><td class="num">正常</td><td>LGA＋母糖尿病史；多 24–72h 自愈</td></tr>
+        <tr><td><b>围生期应激 HI</b></td><td>≤1–2 周</td><td class="num"><b>低</b></td><td class="num"><b>低</b></td><td class="num"><b>不被抑制</b></td><td class="num">正常</td><td class="num">正常</td><td>窒息/早产/IUGR/子痫前期背景；自愈，二氮嗪推迟</td></tr>
+        <tr><td>母亲用药性<span class="tag amber">⭐拓展</span></td><td>生后数小时内</td><td class="num">低</td><td class="num">低</td><td class="num">不被抑制</td><td class="num">正常</td><td class="num">正常</td><td>拉贝洛尔/特布他林/口服降糖药暴露史；停暴露＋喂养多自愈</td></tr>
+        <tr><td><b>先天 HI（K-ATP 型）</b></td><td>&gt;72h 持续</td><td class="num"><b>低</b></td><td class="num"><b>低</b></td><td class="num"><b>不被抑制</b></td><td class="num">正常</td><td class="num">正常</td><td>GIR &gt;10–12 才稳；基因确诊；局灶型可手术治愈</td></tr>
+        <tr><td>GDH 型 HI<span class="tag amber">⭐拓展</span></td><td>数天–数周</td><td class="num">低</td><td class="num">低</td><td class="num">不被抑制</td><td class="num">正常</td><td class="num"><b>轻中度↑</b></td><td>蛋白（亮氨酸）餐后诱发；二氮嗪常有效</td></tr>
+        <tr><td><b>垂体 / 肾上腺</b></td><td>任意</td><td class="num">可低</td><td class="num">正常</td><td class="num">被抑制</td><td class="num">正常</td><td class="num">正常</td><td>皮质醇 &lt;10＋GH &lt;7；小阴茎/中线缺陷；氢化可的松起效</td></tr>
+        <tr><td><b>糖原贮积病</b></td><td>空腹后</td><td class="num">低–不高</td><td class="num">—</td><td class="num">被抑制</td><td class="num"><b>↑↑</b></td><td class="num">正常</td><td><b>肝大</b>；生玉米淀粉饮食</td></tr>
+        <tr><td><b>脂肪酸氧化缺陷</b></td><td>空腹后 / 感染时</td><td class="num"><b>低（造不出）</b></td><td class="num"><b>↑（脂解在进行）</b></td><td class="num">被抑制</td><td class="num">正常</td><td class="num">正常</td><td><b>FFA 高＋酮体低＝断联指纹</b>；酰基肉碱异常；避免空腹</td></tr>
+        <tr><td>半乳糖血症<span class="tag amber">⭐拓展</span></td><td>喂奶后进行性</td><td class="num">—</td><td class="num">—</td><td class="num">被抑制</td><td class="num">可↑</td><td class="num">可↑</td><td>黄疸＋肝大＋白内障；<b>停乳糖</b>换无半乳糖奶方（新生儿筛查病）</td></tr>
+        <tr><td>败血症 / 低体温</td><td>任意</td><td class="num">可阳性</td><td class="num">可升</td><td class="num">被抑制</td><td class="num">可↑</td><td class="num">—</td><td>耗糖↑＋摄入↓；治原发病</td></tr>
+        <tr><td><b>BWS 综合征</b></td><td>新生儿期</td><td class="num">低</td><td class="num">低</td><td class="num">不被抑制</td><td class="num">正常</td><td class="num">正常</td><td>巨舌/脐膨出/偏侧肥大；多数数月内缓解</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">「—」＝无特征性改变。读表心法：先看<b>酮体与 FFA 的组合</b>（双低＝HI 系；FFA 高酮体低＝FAO 断联），再看乳酸与血氨（代谢病方向），最后拿时龄与诱因对号——这也是⑥页判读表的空间展开版。</p>
+
+  <h4>八、按时龄与诱因反推病因（床旁最实用）</h4>
+  <div class="tl">
+    <div class="tlrow"><span class="when">≤12h</span><div class="what">几乎全是<b>过渡期生理＋高危叠加</b>（IDM/早产/SGA/窒息）→ 喂养＋升糖阶梯；不进 HI 查因（本院：24h 内血糖均 ≥3.5 → 不考虑 HI）。</div></div>
+    <div class="tlrow"><span class="when">12–72h</span><div class="what">反复发作＝<b>暂时性 HI 窗口</b>（应激/IDM/母用药）；诊断性评估推迟到 2–3 天——太早分不清生理与病态。</div></div>
+    <div class="tlrow"><span class="when">&gt;72h</span><div class="what">全肠内喂养后仍低 → 进入<b>查因铁三角</b>：HI（最常见）＞ 垂体-肾上腺 ＞ 代谢病；<b>先留标本再补糖</b>（第⑥页）。</div></div>
+    <div class="tlrow"><span class="when">数天–数周</span><div class="what">不缓解 → <b>先天 HI 方向</b>：基因（ABCC8/KCNJ11 患儿及父母）＋¹⁸F-DOPA；此时 GDH 型也会浮出（看血氨）。</div></div>
+    <div class="tlrow"><span class="when">按诱因反查</span><div class="what">喂奶后进行性恶化 → 半乳糖血症<span class="tag amber">⭐</span>；蛋白/母乳（亮氨酸）后诱发 → GDH 型<span class="tag amber">⭐</span>；空腹/感染诱发 → FAO 或 GSD；生后数小时内即低＋母用药史 → 药物性<span class="tag amber">⭐</span>。</div></div>
+  </div>
+
+  <h4>九、先天 HI 的两种命运：局灶 vs 弥漫</h4>
+  <div class="vargrid t2">
+    <div class="vartile a"><div class="vh">局灶型（可治愈）</div><div class="vq"><b>父源 ABCC8/KCNJ11 杂合突变＋病灶内体细胞杂合性丢失</b>（15q 母源印迹区）→ 胰腺内孤立的异常病灶。¹⁸F-DOPA PET 定位后<b>切除病灶＝治愈</b>；术后因正常胰岛减少需<b>监测糖尿病风险</b>（手册⑩页）。</div></div>
+    <div class="vartile c"><div class="vh">弥漫型（长期管理）</div><div class="vq">双等位隐性或复合杂合 → 全胰受累。以药物长期管理为主（二氮嗪有效者可维持），内科失败才考虑大幅胰腺切除；预后与血糖控制质量直接相关。</div></div>
+  </div>
+  <div class="bluebox">
+    <div class="t">为什么「分清局灶/弥漫」值得做基因＋扫描</div>
+    同样叫先天 HI，局灶型一刀治愈、弥漫型终身管理——<b>治疗路径完全分叉</b>。这就是第⑦页「换奥曲肽的同时就做基因检测（患儿＋父母）」的原因：基因结果是 ¹⁸F-DOPA 扫描和外科决策的前置条件。
+  </div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>三种燃料一个底盘，一个刹车四个油门；HI＝三线全断（低酮低 FFA）；时龄＋诱因＋指纹，病因三分天下。</div>
+
+</section>
+
 <footer class="foot">
-  新生儿低血糖 · 床旁住院医师指南（住院医师版）v1.0 · 2026-09-28 · 单文件离线可用 · 长图模式供微信分享<br>
-  内容整理自《新生儿低血糖临床决策手册（全球指南整合·贵院对齐版）》，急救判断前置重构；本院口径（&lt;2.7 诊断、3.5–6.0 目标、GIR 10→12→15→18 阶梯、撤药三步法、6h 禁食试验）原样保留；新增内容限于机制图 4 幅、换算表（mmol↔mg/dL、GIR 速查、加浓配液、奶中糖速）、判读表与床旁动作梳理；第⑨页二氮嗪/奥曲肽撤药方案、第⑩页禁食试验后续处置、第⑦页「四条硬要求」为源手册标注的本院流程缺失之补充建议，引用执行前请科内确认。<br>
+  新生儿低血糖 · 床旁住院医师指南（住院医师版）v1.1 · 2026-09-29 · 单文件离线可用 · 长图模式供微信分享<br>
+  内容整理自《新生儿低血糖临床决策手册（全球指南整合·贵院对齐版）》，急救判断前置重构；本院口径（&lt;2.7 诊断、3.5–6.0 目标、GIR 10→12→15→18 阶梯、撤药三步法、6h 禁食试验）原样保留；新增内容限于机制图 4 幅、换算表（mmol↔mg/dL、GIR 速查、加浓配液、奶中糖速）、判读表与床旁动作梳理，及第⑮页补充知识位（血糖生理最小知识集＝标准教科书知识整理；病因图谱含拓展病种：GDH 型 HI、半乳糖血症、母亲用药性低血糖、局灶/弥漫机制，均以 ⭐拓展 标注）；第⑨页二氮嗪/奥曲肽撤药方案、第⑩页禁食试验后续处置、第⑦页「四条硬要求」为源手册标注的本院流程缺失之补充建议，引用执行前请科内确认。<br>
   本指南由 AI 参与整理生成，供科内住院医师床旁学习参考，<b>不构成医嘱</b>；所有药物使用前<b>双人核对</b>，临床决策以上级医师意见为准；与科室手册/共识冲突时，以手册与共识为准，并请反馈修订。
 </footer>
 </div>
@@ -1639,7 +1775,7 @@
 (function(){
 'use strict';
 var D = (typeof document !== 'undefined') ? document : null;
-var TOTAL = 14;
+var TOTAL = 15;
 
 function current(){
   return parseInt(document.body.getAttribute('data-page')||'1',10) || 1;
