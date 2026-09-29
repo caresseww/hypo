@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="低血糖床旁指南">
+<meta name="theme-color" content="#8a4307">
+<meta name="format-detection" content="telephone=no">
+<title>新生儿低血糖 · 床旁住院医师指南</title>
+<style>
+  :root{
+    --bg:#f2ede2;
+    --card:#ffffff;
+    --ink:#261e10;
+    --ink2:#5c4d33;
+    --ink3:#99886a;
+    --line:#e4dac6;
+    --navy:#b45309;
+    --navy-dark:#8a4307;
+    --blue:#2456c4;
+    --blue-soft:#e8eefb;
+    --cyan:#0e7490;
+    --cyan-soft:#e2f2f6;
+    --purple:#6d4fae;
+    --purple-soft:#efe9f9;
+    --red:#cf4d3c;
+    --red-soft:#fbeae7;
+    --amber:#c9742c;
+    --amber-soft:#fbf0e4;
+    --orange:#d96c2f;
+    --orange-soft:#fdeee2;
+    --green:#2e9e5b;
+    --green-soft:#e6f4eb;
+    --teal-soft:#f7efdf;
+    --mono:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(900px 420px at 8% -5%, rgba(217,119,6,.08), transparent 60%),
+      radial-gradient(900px 420px at 100% 0%, rgba(37,86,196,.05), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue','Microsoft YaHei',sans-serif;
+    font-size:15px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px 90px;}
+
+  /* 顶栏：渐变 hero + 翻页 */
+  .stickyhead{position:sticky;top:0;z-index:60;background:var(--bg);box-shadow:0 2px 14px rgba(138,67,7,.14);}
+  .stickyhead .headinner{max-width:860px;margin:0 auto;padding:0 20px;}
+  header.top{padding:5px 0 0;
+    background:
+      radial-gradient(560px 200px at 88% -30%, rgba(253,230,138,.34), transparent 65%),
+      radial-gradient(420px 180px at 4% 130%, rgba(251,191,36,.18), transparent 60%),
+      linear-gradient(135deg,#d97706 0%,#b45309 55%,#8a4307 100%);}
+  .hero{
+    max-width:860px;margin:0 auto;padding:5px 0 5px;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  }
+  .hero .t{display:flex;align-items:center;gap:8px;color:#fff;font-size:17px;font-weight:800;letter-spacing:.8px;text-shadow:0 1px 3px rgba(0,0,0,.2);}
+  .hero .logo{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28);flex-shrink:0;}
+  .hero .badges{display:flex;align-items:center;gap:6px;}
+  .internal-badge{display:inline-block;font-size:10px;font-weight:700;color:#fff;background:linear-gradient(135deg,#2456c4,#1c3f8f);border-radius:999px;padding:2px 9px;letter-spacing:1.5px;box-shadow:0 2px 6px rgba(0,0,0,.18);white-space:nowrap;}
+  .ver-badge{font-size:9.5px;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:1px 8px;letter-spacing:.5px;text-align:center;white-space:nowrap;}
+  .top-actions{display:flex;gap:5px;margin-top:4px;flex-wrap:wrap;padding-bottom:6px;}
+  body[data-page]:not([data-page="1"]) .top-actions{display:none;}
+  .btn{
+    appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);
+    padding:6px 12px;border-radius:8px;font-size:12.5px;cursor:pointer;
+  }
+  .btn:hover{border-color:var(--navy);color:var(--navy);}
+  .btn.primary{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .btn.primary:hover{background:var(--navy-dark);color:#fff;}
+  .btn.ghost-dark{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.4);}
+  .btn.ghost-dark:hover{background:rgba(255,255,255,.26);color:#fff;}
+
+  /* 翻页 */
+  nav.pager{
+    background:rgba(242,237,226,.96);backdrop-filter:blur(6px);padding:5px 0;
+    display:flex;gap:5px;border-bottom:1px solid var(--line);
+    overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  nav.pager::-webkit-scrollbar{display:none;}
+  .pager-inner{max-width:860px;margin:0 auto;display:flex;gap:4px;width:100%;padding:0 20px;min-width:max-content;}
+  nav.pager .ptab{
+    flex:1;appearance:none;-webkit-appearance:none;border:1px solid var(--line);background:#fff;color:var(--ink2);
+    padding:6px 5px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;
+  }
+  nav.pager .ptab.active{background:linear-gradient(135deg,var(--navy),var(--navy-dark));border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(138,67,7,.30);}
+  nav.pager .ptab:hover{border-color:#e3c896;color:var(--navy);}
+  body.longmode nav.pager{display:none;}
+  body.longmode .stickyhead{position:static;}
+  body.longmode section.card.page{display:block !important;}
+  #exitLong{display:none;}
+  body.longmode #exitLong{display:flex;position:fixed;right:14px;bottom:14px;z-index:80;align-items:center;gap:6px;
+    background:var(--navy);color:#fff;border:none;border-radius:999px;padding:10px 16px;font-size:13px;font-weight:600;
+    box-shadow:0 4px 14px rgba(0,0,0,.3);cursor:pointer;}
+  .fnav{display:none;}
+  body:not(.longmode) .fnav{display:flex;position:fixed;right:14px;bottom:14px;z-index:70;gap:8px;align-items:center;}
+  .fnav button{width:42px;height:42px;border-radius:50%;border:none;background:linear-gradient(135deg,#b45309,#d97706);color:#fff;font-size:20px;font-weight:700;
+    box-shadow:0 6px 18px rgba(138,67,7,.35);cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;}
+  .fnav button:active{background:var(--navy-dark);}
+  .fnav .pind{min-width:52px;height:42px;border-radius:999px;border:none;background:rgba(138,67,7,.92);color:#fff;font-size:13px;font-weight:800;
+    box-shadow:0 4px 14px rgba(138,67,7,.28);display:flex;align-items:center;justify-content:center;font-family:var(--mono);}
+  section.card.page{display:none;}
+  section.card.page.active{display:block;}
+
+  /* 卡片 */
+  section.card{
+    background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:22px 22px 24px;margin-bottom:18px;margin-top:16px;scroll-margin-top:118px;
+    box-shadow:0 1px 2px rgba(138,67,7,.05), 0 10px 30px rgba(138,67,7,.07);
+  }
+  .card-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap;margin-top:20px;}
+  .card-head:first-child,.card-head.mt0{margin-top:0;}
+  .card-head .step-no{
+    font-family:var(--mono);font-size:12px;color:#fff;background:var(--navy);
+    border-radius:6px;padding:2px 7px;flex-shrink:0;
+  }
+  .card-head .step-no.red{background:var(--red);}
+  .card-head .step-no.cyan{background:var(--cyan);}
+  .card-head .step-no.purple{background:var(--purple);}
+  .card-head .step-no.amber{background:var(--amber);}
+  .card-head .step-no.blue{background:var(--blue);}
+  .card-head .step-no.orange{background:var(--orange);}
+  .card-head .step-no.green{background:var(--green);}
+  .card-head h2{font-size:17px;margin:0;}
+  .card-sub{color:var(--ink2);font-size:13px;margin:0 0 14px;padding-left:2px;}
+  .card h3{font-size:14.5px;margin:18px 0 8px;color:var(--ink);}
+  .card h3:first-child{margin-top:0;}
+
+  /* 提示盒 */
+  .bluebox{background:var(--blue-soft);border:1px solid #d4e0f5;border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13.5px;}
+  .redbox{background:var(--red-soft);border:1px solid #f2d5cf;border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13.5px;}
+  .amberbox{background:var(--amber-soft);border:1px solid #f0ddc4;border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13.5px;}
+  .purplebox{background:var(--purple-soft);border:1px solid #e0d5f2;border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13.5px;}
+  .cyanbox{background:var(--cyan-soft);border:1px solid #c8e4ec;border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13.5px;}
+  .tealbox{background:var(--teal-soft);border:1px solid #ecd9b8;border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13.5px;}
+  .orangebox{background:var(--orange-soft);border:1px solid #f5ddc9;border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13.5px;}
+  .greenbox{background:var(--green-soft);border:1px solid #cde8d8;border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13.5px;}
+  .box .t{font-weight:700;font-size:12.5px;margin-bottom:4px;letter-spacing:.5px;}
+  .bluebox .t{color:var(--blue);} .redbox .t{color:var(--red);} .amberbox .t{color:var(--amber);}
+  .purplebox .t{color:var(--purple);} .cyanbox .t{color:var(--cyan);} .tealbox .t{color:var(--navy-dark);}
+  .orangebox .t{color:var(--orange);} .greenbox .t{color:var(--green);}
+  .box ul,.box ol{margin:4px 0 2px;padding-left:20px;}
+  .box li{margin:3px 0;}
+  .bluebox b,.redbox b,.amberbox b,.purplebox b,.cyanbox b,.tealbox b,.orangebox b,.greenbox b{color:inherit;}
+
+  /* 贵院专属盒 */
+  .hospbox{background:linear-gradient(180deg,#fdf3e0,#fffdf8);border:1px solid #e8c98f;border-left:4px solid var(--navy);border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13.5px;}
+  .hospbox .t{font-weight:800;font-size:12.5px;color:var(--navy-dark);margin-bottom:4px;letter-spacing:.5px;}
+  .hospbox ul,.hospbox ol{margin:4px 0 2px;padding-left:20px;}
+  .hospbox li{margin:3px 0;}
+  .hospbox b{color:var(--navy-dark);}
+
+  /* 表格 */
+  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0 4px;border:1px solid var(--line);border-radius:10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:540px;background:#fff;}
+  table.slim{min-width:0;}
+  th{background:#f6edda;color:var(--ink2);font-size:12px;font-weight:600;text-align:left;padding:8px 10px;white-space:nowrap;border-bottom:1px solid var(--line);letter-spacing:.3px;}
+  td{padding:8px 10px;border-bottom:1px solid #f1ebe0;vertical-align:top;line-height:1.55;}
+  tr:last-child td{border-bottom:none;}
+  tbody tr:nth-child(even){background:#fbf8f2;}
+  tbody tr:hover td{background:#faf4e8;}
+  td b{color:var(--ink);}
+  tr.hosp-row td{background:#fdf3e0 !important;border-left:3px solid var(--navy);}
+  tr.hosp-row td b{color:var(--navy-dark);}
+  table.slim th{padding:7px 9px;} table.slim td{padding:7px 9px;}
+  td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap;}
+  .tag{display:inline-block;font-size:10.5px;padding:1.5px 8px;border-radius:20px;font-weight:600;white-space:nowrap;vertical-align:1px;}
+  .tag.cyan{background:var(--cyan-soft);color:var(--cyan);}
+  .tag.blue{background:var(--blue-soft);color:var(--blue);}
+  .tag.purple{background:var(--purple-soft);color:var(--purple);}
+  .tag.amber{background:var(--amber-soft);color:var(--amber);}
+  .tag.orange{background:var(--orange-soft);color:var(--orange);}
+  .tag.green{background:var(--green-soft);color:var(--green);}
+  .tag.red{background:var(--red-soft);color:var(--red);}
+  .tag.teal{background:var(--teal-soft);color:var(--navy-dark);}
+  .tag.grey{background:#efece4;color:var(--ink2);}
+  .tag.hosp{background:#fdf3e0;color:var(--navy-dark);border:1px solid #e8c98f;}
+
+  /* 高危名单 chips */
+  .riskwrap{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0 4px;}
+  .riskchip{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:12.5px;font-weight:600;color:var(--ink2);}
+  .riskchip::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--navy);flex-shrink:0;}
+  .riskchip.hot{border-color:#f2d5cf;background:var(--red-soft);color:var(--red);}
+  .riskchip.hot::before{background:var(--red);}
+  .riskchip.grey{color:var(--ink3);border-style:dashed;}
+  .riskchip.grey::before{background:var(--ink3);}
+
+  /* 三变量导航砖 */
+  .vargrid{display:grid;gap:10px;grid-template-columns:1fr;margin-top:12px;}
+  @media(min-width:640px){.vargrid.t3{grid-template-columns:1fr 1fr 1fr;}.vargrid.t2{grid-template-columns:1fr 1fr;}}
+  .vartile{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;box-shadow:0 1px 2px rgba(138,67,7,.04);transition:box-shadow .15s;}
+  .vartile:hover{box-shadow:0 4px 14px rgba(138,67,7,.10);}
+  .vartile .vh{font-weight:700;font-size:13.5px;display:flex;align-items:center;gap:7px;margin-bottom:5px;}
+  .vartile .vh::before{content:'';width:8px;height:8px;border-radius:3px;background:currentColor;display:inline-block;flex-shrink:0;}
+  .vartile .vq{font-size:12.5px;color:var(--ink2);line-height:1.6;}
+  .vartile.a .vh{color:var(--blue);} .vartile.a{background:linear-gradient(180deg,#f6f9ff,#fff);}
+  .vartile.b .vh{color:var(--cyan);} .vartile.b{background:linear-gradient(180deg,#f2fafc,#fff);}
+  .vartile.c .vh{color:var(--purple);} .vartile.c{background:linear-gradient(180deg,#f8f5fd,#fff);}
+  .vartile.d .vh{color:var(--navy);} .vartile.d{background:linear-gradient(180deg,#faf3e2,#fff);}
+  .vartile.e .vh{color:var(--orange);} .vartile.e{background:linear-gradient(180deg,#fdf4ec,#fff);}
+  .vartile.f .vh{color:var(--red);} .vartile.f{background:linear-gradient(180deg,#fdf3f1,#fff);}
+
+  /* 一行要点 pt */
+  .pt{display:flex;gap:9px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-left:3px solid var(--navy);border-radius:9px;padding:8px 12px;font-size:13px;line-height:1.6;margin:8px 0;}
+  .pt::before{content:'▸';color:var(--navy);font-weight:800;flex-shrink:0;line-height:1.55;}
+  .pt b{color:var(--navy-dark);}
+  .pt.red{border-left-color:var(--red);background:var(--red-soft);}
+  .pt.red::before{color:var(--red);}
+  .pt.red b{color:var(--red);}
+  .pt.green{border-left-color:var(--green);background:var(--green-soft);}
+  .pt.green::before{color:var(--green);}
+  .pt.blue{border-left-color:var(--blue);background:var(--blue-soft);}
+  .pt.blue::before{color:var(--blue);}
+
+  /* 记忆条 */
+  .mnbar{background:linear-gradient(135deg,#8a4307,#b45309);color:#fff;border-radius:11px;padding:10px 15px;font-size:13.5px;font-weight:700;letter-spacing:.5px;margin:16px 0 4px;display:flex;gap:10px;align-items:center;box-shadow:0 3px 10px rgba(138,67,7,.28);line-height:1.6;}
+  .mnbar .mn-k{flex-shrink:0;font-size:10px;font-weight:800;border:1px solid rgba(255,255,255,.55);border-radius:999px;padding:1px 9px;letter-spacing:2px;}
+
+  /* 红线条目 */
+  .redline{display:flex;gap:10px;align-items:flex-start;border:1px solid #f2d5cf;background:var(--red-soft);border-radius:12px;padding:11px 13px;margin-bottom:9px;font-size:13.5px;line-height:1.6;}
+  .redline .no{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#d95f4c,#b8402f);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .redline b{color:var(--red);}
+
+  /* 检查清单 */
+  .chk{list-style:none;margin:8px 0 0;padding:0;}
+  .chk li{display:flex;gap:9px;align-items:flex-start;padding:7px 2px;border-bottom:1px dashed #e6e0d2;font-size:13.5px;line-height:1.55;}
+  .chk li:last-child{border-bottom:none;}
+  .chk li::before{content:'☐';color:var(--navy);font-size:15px;flex-shrink:0;line-height:1.4;}
+  .chk li b{color:var(--ink);}
+
+  /* 步骤行 */
+  .steps{display:grid;gap:9px;margin-top:10px;}
+  .steprow{display:flex;gap:10px;align-items:stretch;}
+  .steprow .no{flex:0 0 30px;height:30px;border-radius:10px;background:linear-gradient(135deg,#a34808,#b45309);color:#fff;font-weight:800;font-size:14px;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;font-family:var(--mono);box-shadow:0 2px 6px rgba(138,67,7,.25);}
+  .steprow:nth-child(2) .no{background:linear-gradient(135deg,#b0560b,#c2660e);} .steprow:nth-child(3) .no{background:linear-gradient(135deg,#bc640f,#c97512);}
+  .steprow:nth-child(4) .no{background:linear-gradient(135deg,#c87213,#d4811a);} .steprow:nth-child(5) .no{background:linear-gradient(135deg,#d4801a,#dd8e26);}
+  .steprow:nth-child(6) .no{background:linear-gradient(135deg,#dd8e26,#e69c35);}
+  .steprow .bd{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px;line-height:1.6;}
+  .steprow .bd b{color:var(--navy-dark);}
+
+  /* 时间轴 */
+  .tl{display:grid;gap:9px;}
+  .tlrow{display:flex;gap:10px;align-items:stretch;}
+  .tlrow .when{flex:0 0 96px;background:var(--navy);color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;text-align:center;padding:8px 4px;line-height:1.4;}
+  .tlrow:nth-child(2) .when{background:#b0560b;} .tlrow:nth-child(3) .when{background:#bc640f;}
+  .tlrow:nth-child(4) .when{background:#c87213;} .tlrow:nth-child(5) .when{background:#d4801a;}
+  .tlrow:nth-child(6) .when{background:#dd8e26;}
+  .tlrow .what{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px;line-height:1.6;}
+  .tlrow .what b{color:var(--navy-dark);}
+
+  /* 信号链 */
+  .chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0;}
+  .chain .pill{background:var(--teal-soft);border:1px solid #ecd9b8;border-radius:999px;padding:2px 11px;font-size:12.5px;font-weight:700;color:var(--navy-dark);white-space:nowrap;}
+  .chain .pill.hot{background:var(--red-soft);border-color:#f2d5cf;color:var(--red);}
+  .chain .pill.cold{background:var(--blue-soft);border-color:#d4e0f5;color:var(--blue);}
+  .chain .pill.grn{background:var(--green-soft);border-color:#cde8d8;color:var(--green);}
+  .chain .ar{color:var(--ink3);font-weight:800;}
+
+  /* 分流三列 */
+  .tri{display:grid;gap:10px;grid-template-columns:1fr;margin-top:12px;}
+  @media(min-width:640px){.tri{grid-template-columns:1fr 1fr 1fr;}}
+  .tricard{border-radius:14px;border:1px solid var(--line);padding:0 0 10px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(138,67,7,.04);}
+  .tricard .th{padding:8px 13px;font-weight:800;font-size:13.5px;color:#fff;}
+  .tricard.low .th{background:linear-gradient(135deg,#2456c4,#4a76d8);} .tricard.mid .th{background:linear-gradient(135deg,#b45309,#cf7a24);} .tricard.high .th{background:linear-gradient(135deg,#6d4fae,#8a67c8);}
+  .tricard.crit .th{background:linear-gradient(135deg,#cf4d3c,#e0705f);}
+  .tricard .bd{padding:9px 13px 0;font-size:12.5px;line-height:1.65;color:var(--ink2);}
+  .tricard .bd b{color:var(--ink);}
+  .tricard .bd ul{margin:4px 0 0;padding-left:18px;}
+  .tricard .bd li{margin:3px 0;}
+
+  /* 机制图 */
+  .fig{margin:14px 0 6px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px 12px 8px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig .cap{font-size:11.5px;color:var(--ink3);margin-top:6px;line-height:1.7;}
+  .fig .cap b{color:var(--ink2);}
+
+  /* 公式卡 */
+  .fx{font-family:var(--mono);background:#faf3e6;border:1px solid #ecd9b8;border-radius:10px;padding:10px 14px;font-size:13.5px;color:var(--navy-dark);margin:10px 0;line-height:1.8;}
+  .fx b{color:var(--navy);}
+  .formgrid{display:grid;gap:10px;grid-template-columns:1fr;margin-top:10px;}
+  @media(min-width:640px){.formgrid{grid-template-columns:1fr 1fr;}}
+  .fcard{border:1px solid var(--line);border-radius:12px;padding:11px 14px;background:#fff;}
+  .fcard .fh{font-weight:800;font-size:13px;color:var(--navy);margin-bottom:4px;}
+  .fcard .fb{font-size:12.5px;color:var(--ink2);line-height:1.65;}
+  .fcard .fb .fx{margin:6px 0 2px;}
+
+  /* 药物卡 dcard */
+  .dcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 1px 3px rgba(138,67,7,.06);}
+  .dcard .dh{display:flex;align-items:center;gap:9px;padding:9px 14px;color:#fff;font-weight:800;font-size:14px;flex-wrap:wrap;}
+  .dcard .dh .sub{font-weight:600;font-size:10.5px;opacity:.88;margin-left:auto;letter-spacing:.5px;}
+  .dcard .db{padding:11px 14px;font-size:13px;line-height:1.65;}
+  .dcard .db ul,.dcard .db ol{margin:4px 0 4px;padding-left:19px;}
+  .dcard .db li{margin:3.5px 0;}
+  .dcard .db b{color:var(--ink);}
+  .dcard.c1 .dh{background:linear-gradient(135deg,#2e9e5b,#3fb56e);}
+  .dcard.c2 .dh{background:linear-gradient(135deg,#b45309,#d97706);}
+  .dcard.c3 .dh{background:linear-gradient(135deg,#6d4fae,#8a67c8);}
+  .dcard.c4 .dh{background:linear-gradient(135deg,#0e7490,#1290b0);}
+  .dcard.c5 .dh{background:linear-gradient(135deg,#2456c4,#4a76d8);}
+  .dcard.c6 .dh{background:linear-gradient(135deg,#cf4d3c,#e0705f);}
+
+  /* 换算带 */
+  .conv{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 3px;}
+  .conv .cv{font-family:var(--mono);font-size:12px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 9px;color:var(--ink2);white-space:nowrap;}
+  .conv .cv b{color:var(--navy);font-weight:800;}
+  .conv .cv.hot{background:var(--red-soft);border-color:#f2d5cf;}
+  .conv .cv.hot b{color:var(--red);}
+  .conv .cv.hosp{background:#fdf3e0;border-color:#e8c98f;}
+  .conv .cv.hosp b{color:var(--navy-dark);}
+
+  /* 病例/注意事项 */
+  .case{background:var(--amber-soft);border:1px solid #f0ddc4;border-radius:10px;padding:11px 14px;margin:10px 0 8px;font-size:13.5px;line-height:1.7;}
+  .case .t{font-weight:700;color:var(--amber);font-size:12.5px;margin-bottom:3px;letter-spacing:.5px;}
+  .case ol{margin:4px 0 2px;padding-left:20px;}
+  .case ol li{margin:4px 0;}
+  .whycard{background:#fff;border:1px dashed var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;font-size:13px;line-height:1.7;}
+  .whycard .t{font-weight:700;color:var(--ink2);font-size:12.5px;margin-bottom:3px;}
+
+  /* 交叉引用 chips */
+  .xref{display:inline-block;font-size:11.5px;font-weight:700;color:var(--navy-dark);background:var(--teal-soft);border:1px solid #ecd9b8;
+    border-radius:999px;padding:1px 10px;cursor:pointer;white-space:nowrap;vertical-align:1px;margin:0 2px;text-decoration:none;}
+  .xref:hover{background:#f0ddba;}
+  a{color:var(--blue);}
+
+  /* 长文页（JHACH 全文） */
+  .doc h4{font-size:13.5px;margin:16px 0 6px;color:var(--navy-dark);}
+  .doc p{font-size:13px;line-height:1.75;margin:7px 0;color:var(--ink);}
+  .doc p b{color:var(--ink);}
+  .doc .src{font-size:11.5px;color:var(--ink3);border-left:3px solid var(--line);padding-left:10px;margin:10px 0;line-height:1.7;}
+  .doc ol,.doc ul{font-size:13px;line-height:1.75;padding-left:22px;margin:7px 0;}
+  .doc li{margin:4px 0;}
+
+  .ref{margin-bottom:12px;font-size:13px;line-height:1.6;}
+  .ref .ref-t{font-weight:600;}
+  .ref .ref-src{color:var(--ink3);font-size:12px;}
+
+  footer.foot{margin-top:22px;padding:0 4px;color:var(--ink3);font-size:11.5px;line-height:1.8;}
+  hr.sep{border:none;border-top:1px dashed var(--line);margin:16px 0;}
+  .kbd{font-family:var(--mono);background:#efece4;border-radius:5px;padding:1px 6px;font-size:12.5px;color:var(--ink2);}
+  .big-red{color:var(--red);font-weight:800;}
+  .big-navy{color:var(--navy);font-weight:800;}
+  .big-orange{color:var(--orange);font-weight:800;}
+  .note{font-size:12px;color:var(--ink3);margin-top:8px;line-height:1.7;}
+
+  @keyframes pgfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  section.card.page.active{animation:pgfade .22s ease;}
+  body.longmode section.card.page{animation:none;}
+  @media print{section.card.page{animation:none !important;}}
+
+  @media print{
+    .stickyhead{position:static;box-shadow:none;}
+    nav.pager,.top-actions,#exitLong,.fnav{display:none !important;}
+    section.card.page{display:block !important;page-break-before:auto;}
+    section.card{page-break-inside:avoid;}
+    body{background:#fff;}
+  }
+</style>
+</head>
+<body data-page="1">
+
+<div class="stickyhead">
+  <div class="headinner">
+    <header class="top">
+      <div class="hero">
+        <div class="twrap">
+          <div class="t"><span class="logo">糖</span>新生儿低血糖 · 床旁住院医师指南</div>
+          <div class="hero-sub">两套阈值 · GIR 阶梯 10→12→15→18 · 撤药三步法 · JHACH 双路径全文 · 全球指南整合 + 本院流程对齐</div>
+        </div>
+        <div class="badges">
+          <span class="internal-badge">内部学习使用</span>
+          <span class="ver-badge">住院医师版 v1.0</span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="btn primary" onclick="toggleLong(true)">📱 长图模式（截图/分享用）</button>
+        <button class="btn" onclick="goPage(4)">⚡ 值班直达：急救推糖</button>
+        <button class="btn ghost-hide" onclick="location.reload()">↻ 重置</button>
+      </div>
+    </header>
+    <nav class="pager">
+      <div class="pager-inner">
+        <button class="ptab active" onclick="goPage(1)">① 导读·三问</button>
+        <button class="ptab" onclick="goPage(2)">② 判读</button>
+        <button class="ptab" onclick="goPage(3)">③ 筛查</button>
+        <button class="ptab" onclick="goPage(4)">④ 急救</button>
+        <button class="ptab" onclick="goPage(5)">⑤ 糖速阶梯</button>
+        <button class="ptab" onclick="goPage(6)">⑥ 查因</button>
+        <button class="ptab" onclick="goPage(7)">⑦ HI用药</button>
+        <button class="ptab" onclick="goPage(8)">⑧ 其他病因</button>
+        <button class="ptab" onclick="goPage(9)">⑨ 撤药</button>
+        <button class="ptab" onclick="goPage(10)">⑩ 出院随访</button>
+        <button class="ptab" onclick="goPage(11)">⑪ 剂量速查</button>
+        <button class="ptab" onclick="goPage(12)">⑫ 对照·红线</button>
+        <button class="ptab" onclick="goPage(13)">⑬ JHACH持续期</button>
+        <button class="ptab" onclick="goPage(14)">⑭ JHACH早期</button>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<button id="exitLong" onclick="toggleLong(false)">✕ 退出长图模式</button>
+<div class="fnav">
+  <button onclick="navRel(-1)" title="上一页">‹</button>
+  <span class="pind" id="pind">1/14</span>
+  <button onclick="navRel(1)" title="下一页">›</button>
+</div>
+
+<div class="wrap">
+
+<!-- ================= 页1 导读·三问 ================= -->
+<section class="card page active" id="page1">
+
+  <div class="card-head"><h2>🧭 核心心法：低血糖处理只回答四个动作</h2></div>
+  <p class="card-sub"><b>要不要处理、怎么升上来、为什么降、什么时候撤</b>——新生儿低血糖的全部床旁决策，压缩成这四个动作。每个动作都先分<strong>时龄</strong>（过渡期生理 vs 持续期病理）和<strong>症状</strong>（有 vs 无），再谈方案。本指南把全球七部指南与本院《持续低血糖诊疗流程》逐条对齐：全球做法用彩色盒，<b>本院口径用金边盒</b>，手册缺失但必要的补充用 ⚠️ 标注。</p>
+
+  <div class="tealbox">
+    <div class="t">核心公理：先定时龄，再定症状，最后定病因</div>
+    <b>① 时龄分两套阈值</b>：生后 48–72h 内是生理过渡期（目标 45–50 mg/dL）；拖过 72h 或需要越来越高的糖速，就是病理性（目标 &gt;70 mg/dL）。<b>② 症状定速度</b>：无症状能喂养→先喂 ± 凝胶；有症状或血糖 &lt;25 mg/dL（1.4 mmol/L）→ 不等阶梯，直接 D10W 2 mL/kg 静推。<b>③ 病因抓高胰岛素血症</b>：持续低血糖最常见的原因是 HI，脑缺乏酮体替代供能，最伤脑，也是药物阶梯的主线。<span class="xref" onclick="jump(2)">→ 第②页 两套阈值讲透</span>
+  </div>
+
+  <div class="card-head"><h2>开篇：值班时最常被问的三个问题</h2></div>
+  <div class="vargrid">
+    <div class="vartile f">
+      <div class="vh">问题一：这个数值低不低，要不要处理？</div>
+      <div class="vq">先看<b>生后几小时</b>。48–72h 内是生理过渡期，处理目标 45–50 mg/dL（2.5–2.8 mmol/L）；拖过 72h、或需要不断加糖速，就是病理性，目标提到 &gt;70 mg/dL（&gt;3.9 mmol/L）。<b>本院标准：诊断 &lt;2.7 mmol/L，目标 3.5–6.0 mmol/L。</b><span class="xref" onclick="jump(2)">→ 阈值对照表</span></div>
+    </div>
+    <div class="vartile e">
+      <div class="vh">问题二：先喂、先涂凝胶、还是直接推糖？</div>
+      <div class="vq">无症状、能喂养：<b>先喂 ± 凝胶</b>；有症状或 &lt;25 mg/dL（&lt;1.4 mmol/L）：<b>不等，直接 D10W 2 mL/kg 静推 5 分钟</b>，推完立即接持续输注。<span class="xref" onclick="jump(4)">→ 急救决策图</span></div>
+    </div>
+    <div class="vartile c">
+      <div class="vh">问题三：什么时候该查高胰岛素血症？</div>
+      <div class="vq">全球口径：GIR 需 &gt;10–12 mg/kg/min、或静脉糖已用 &gt;7 天、或 &gt;72h 仍 &lt;60 mg/dL。<b>本院标准：一次 BG &lt;2.7，或 48h 内两次 2.7–3.4 mmol/L，即高度怀疑 HI</b>——这个「灰区连续两次」的设计比单纯看 GIR 更直观、更早触发。<span class="xref" onclick="jump(6)">→ 查因与标本</span></div>
+    </div>
+  </div>
+
+  <div class="card-head"><h2>六个数字，先钉在脑子里</h2></div>
+  <div class="conv">
+    <span class="cv hosp"><b>&lt;2.7</b> mmol/L 本院诊断线</span>
+    <span class="cv hosp"><b>3.5–6.0</b> mmol/L 本院目标带</span>
+    <span class="cv hot"><b>&lt;1.4</b> mmol/L 或有症状＝立即推糖</span>
+    <span class="cv"><b>10→12→15→18</b> GIR 阶梯</span>
+    <span class="cv"><b>2 mL/kg</b> D10W bolus ＝ 200 mg/kg</span>
+    <span class="cv"><b>6 h</b> 出院禁食试验（本院 &lt;3.5 终止）</span>
+    <span class="cv"><b>÷144</b> GIR 计算公式的钥匙</span>
+  </div>
+
+  <div class="card-head"><h2>三条铁律（比任何阈值都优先）</h2></div>
+  <div class="redline"><span class="no">1</span><span><b>有症状或 &lt;1.4 mmol/L，不等喂养阶梯</b>——直接 D10W 2 mL/kg 静推，任何「再喂一次试试」都是在赌脑的能源底线。</span></div>
+  <div class="redline"><span class="no">2</span><span><b>关键标本必须在补糖之前留</b>——血糖 &lt;50 mg/dL 的那一刻是唯一窗口，补糖之后再留，胰岛素、酮体、游离脂肪酸全部失真。</span></div>
+  <div class="redline"><span class="no">3</span><span><b>确诊和诊断性判读必须用实验室血浆葡萄糖</b>——POCT 全血值比血浆低约 15%，标本延迟每小时还会掉 6 mg/dL。</span></div>
+
+  <div class="card-head"><h2>三读法：这本指南怎么用</h2></div>
+  <div class="vargrid t3">
+    <div class="vartile f">
+      <div class="vh">一读 · 值班急用</div>
+      <div class="vq">血糖报告在手 → 直接翻 <span class="xref" onclick="jump(4)">第④页 急救</span>；要算糖速、配浓糖 → <span class="xref" onclick="jump(5)">第⑤页</span>；剂量拿不准 → <span class="xref" onclick="jump(11)">第⑪页 剂量速查</span>。</div>
+    </div>
+    <div class="vartile c">
+      <div class="vh">二读 · 反复低血糖患儿</div>
+      <div class="vq">糖速加不上去 / 撤不下来 → <span class="xref" onclick="jump(6)">第⑥页 查因</span>（先留标本！）→ <span class="xref" onclick="jump(7)">第⑦页 HI 用药</span> → <span class="xref" onclick="jump(9)">第⑨页 撤药节奏</span>。</div>
+    </div>
+    <div class="vartile a">
+      <div class="vh">三读 · 系统学习</div>
+      <div class="vq">周末按页序通读：第②页是全书钥匙，第⑫页看全球与本院的差异全貌，第⑬⑭页收录 JHACH 两份路径全文汉化，供溯源。</div>
+    </div>
+  </div>
+
+  <div class="card-head"><h2>全书地图（14 页）</h2></div>
+  <div class="formgrid">
+    <div class="fcard"><div class="fh">② 判读</div><div class="fb">过渡期生理曲线 · 全球八口径阈值对照大表 · mmol↔mg/dL 换算带 · POCT 三坑 · 为什么持续期目标要 &gt;70。</div></div>
+    <div class="fcard"><div class="fh">③ 筛查监测</div><div class="fb">高危儿名单 · 筛查时点与停测 · 本院监测频率两档 · 症状清单（神经组/自主神经组）。</div></div>
+    <div class="fcard"><div class="fh">④ 急救</div><div class="fb">急救决策流程图 · 喂养→凝胶→推糖三级 · D10W bolus 细节 · 本院口径（先喂养 30min 复查 vs 直接推糖）。</div></div>
+    <div class="fcard"><div class="fh">⑤ 糖速阶梯</div><div class="fb">GIR 公式与速查表 · 加浓配液表（为什么 GIR 10 必须加浓）· 本院 GIR 10→12→15→18 阶梯图。</div></div>
+    <div class="fcard"><div class="fh">⑥ 查因</div><div class="fb">六条触发 · 补糖前留标本清单 · 低血糖状态下各指标期望值表 · 三方向解读 · 胰高糖素刺激试验。</div></div>
+    <div class="fcard"><div class="fh">⑦ HI 用药</div><div class="fb">作用位点机制图 · 胰高糖素（桥接）· 二氮嗪（一线，四条硬要求）· 奥曲肽（二线）· 不推荐药物 · 基因/外科。</div></div>
+    <div class="fcard"><div class="fh">⑧ 其他病因</div><div class="fb">垂体/肾上腺 · 遗传代谢病 · 围生期应激型 HI（最常见暂时性病因）· 病史查体线索清单。</div></div>
+    <div class="fcard"><div class="fh">⑨ 撤药</div><div class="fb">撤药前提三选一 · 本院三步法 · ⚠️ 二氮嗪/奥曲肽撤药方案（手册缺失，本指南补充）· 失败处理 · 喂养配合。</div></div>
+    <div class="fcard"><div class="fh">⑩ 出院随访</div><div class="fb">6h 安全禁食试验 · 带药出院四件套 · 神经发育随访（30%–50%）· 奶中糖速换算表。</div></div>
+    <div class="fcard"><div class="fh">⑪ 剂量速查</div><div class="fb">全药物一张表：bolus / 凝胶 / 胰高糖素 / 二氮嗪 / 双克 / 奥曲肽 / 氢化可的松。</div></div>
+    <div class="fcard"><div class="fh">⑫ 对照·红线</div><div class="fb">全球速查总表 · 本院 10 条差异清单 · 8 条床旁红线汇总。</div></div>
+    <div class="fcard"><div class="fh">⑬⑭ JHACH 全文</div><div class="fb">《新生儿延长性/持续性低血糖路径》（2024）与《早期管理路径 CVICU》（2025）完整汉化，含 GRADE 表与关键化验期望值。</div></div>
+  </div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>2.7 是诊断线，3.5–6.0 是目标带；有症状不喂等，先留血、再补糖。</div>
+
+</section>
+
+<!-- ================= 页2 判读 ================= -->
+<section class="card page" id="page2">
+
+  <div class="card-head"><span class="step-no amber">②</span><h2>判读：这个数值要不要处理？</h2></div>
+  <p class="card-sub">同一个血糖值，在生后 6 小时和生后 5 天含义完全不同。<b>判读的第一变量永远是时龄，不是数值本身。</b></p>
+
+  <div class="tealbox">
+    <div class="t">两套阈值：48–72h 是分水岭</div>
+    <b>过渡期（&lt;48–72h）</b>：处理目标 45–50 mg/dL（2.5–2.8 mmol/L），这是生理性过渡，只要够得着目标就不过度干预。<b>持续期（&gt;72h）或需不断上调糖速</b>：提示病理性低血糖，目标提到 <b>&gt;70 mg/dL（&gt;3.9 mmol/L）</b>。<b>本院口径：诊断 &lt;2.7 mmol/L，目标 3.5–6.0 mmol/L</b>，仅用于生后 12h 以后，或 12h 内反复低血糖者。
+  </div>
+
+  <div class="bluebox">
+    <div class="t">为什么会降：宫外适应的生理曲线</div>
+    健康足月纯母乳喂养儿生后血糖从约 <b>2/3 母体水平</b>开始下降，<b>生后 1h 可低至 1.8 mmol/L（约 32 mg/dL）</b>，随后回升，72h 内维持 &gt;2.0 mmol/L。GLOW 前瞻性研究：健康儿前 18h 平均 <b>59±11 mg/dL</b>，48h 后保持稳定，<b>第 4 天升至新平台 89±13 mg/dL</b>——婴儿大约在第 4 天完成代谢过渡。这一「先降后升」是正常宫外适应，<b>不应干预</b>。
+    <br><br>但 <b>IDM、SGA、LGA、早产、围生期窒息</b>儿因暂时性高胰岛素或糖原储备不足，下降更深、更久。若超过 72h、或需要越来越高的糖速才能维持，提示<b>持续性高胰岛素血症、垂体功能低下、遗传代谢病</b>——此时脑缺乏酮体替代供能，必须把目标拉高。
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 760 560" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'PingFang SC',sans-serif">
+      <defs>
+        <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#99886a"/></marker>
+      </defs>
+      <!-- 坐标轴 -->
+      <line x1="70" y1="270" x2="735" y2="270" stroke="#99886a" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <line x1="70" y1="270" x2="70" y2="22" stroke="#99886a" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <text x="40" y="150" font-size="12" fill="#5c4d33" transform="rotate(-90 40 150)" text-anchor="middle">血糖 mg/dL</text>
+      <text x="745" y="288" font-size="12" fill="#5c4d33" text-anchor="end">生后时间</text>
+      <!-- x 刻度 -->
+      <g font-size="11" fill="#99886a" text-anchor="middle">
+        <line x1="70" y1="270" x2="70" y2="275" stroke="#99886a"/><text x="70" y="290">0h</text>
+        <line x1="97" y1="270" x2="97" y2="275" stroke="#99886a"/><text x="97" y="290">1h</text>
+        <line x1="152" y1="270" x2="152" y2="275" stroke="#99886a"/><text x="152" y="290">12h</text>
+        <line x1="235" y1="270" x2="235" y2="275" stroke="#99886a"/><text x="235" y="290">24h</text>
+        <line x1="400" y1="270" x2="400" y2="275" stroke="#99886a"/><text x="400" y="290">48h</text>
+        <line x1="565" y1="270" x2="565" y2="275" stroke="#99886a"/><text x="565" y="290">72h</text>
+        <line x1="730" y1="270" x2="730" y2="275" stroke="#99886a"/><text x="726" y="290">4–5天</text>
+      </g>
+      <!-- y 刻度 -->
+      <g font-size="11" fill="#99886a" text-anchor="end">
+        <line x1="65" y1="247" x2="70" y2="247" stroke="#99886a"/><text x="60" y="251">25</text>
+        <line x1="65" y1="196" x2="70" y2="196" stroke="#99886a"/><text x="60" y="200">45</text>
+        <line x1="65" y1="158" x2="70" y2="158" stroke="#99886a"/><text x="60" y="162">60</text>
+        <line x1="65" y1="106" x2="70" y2="106" stroke="#99886a"/><text x="60" y="110">80</text>
+        <line x1="65" y1="55" x2="70" y2="55" stroke="#99886a"/><text x="60" y="59">100</text>
+      </g>
+      <!-- 过渡期/持续期 分区底色 -->
+      <rect x="70" y="22" width="495" height="248" fill="#faf6ec"/>
+      <rect x="565" y="22" width="165" height="248" fill="#f2f8f4"/>
+      <!-- 72h 分界 -->
+      <line x1="565" y1="22" x2="565" y2="270" stroke="#99886a" stroke-width="1.2" stroke-dasharray="5 4"/>
+      <text x="572" y="262" font-size="11" fill="#5c4d33">72h 分水岭</text>
+      <text x="300" y="44" font-size="13" font-weight="700" fill="#b45309">过渡期 · 生理性下降（不应干预）</text>
+      <text x="647" y="44" font-size="13" font-weight="700" fill="#2e9e5b" text-anchor="middle">持续期 · 病理性</text>
+      <!-- 健康儿血糖带 -->
+      <path d="M70,141 C80,150 85,185 97,206 C120,235 135,225 152,214 C185,192 215,183 235,178 C290,163 350,155 400,144 C455,133 515,120 565,109 C620,98 680,72 730,51 L730,88 C680,106 620,124 565,136 C510,148 450,160 400,171 C350,182 290,193 235,205 C210,210 190,219 152,236 C130,246 105,250 97,229 C88,208 80,163 70,152 Z"
+        fill="rgba(217,119,6,.16)" stroke="#b45309" stroke-width="1.6"/>
+      <text x="330" y="140" font-size="11.5" fill="#8a4307" font-weight="600">健康足月儿血糖带（GLOW：18h 59±11 → 第4天 89±13）</text>
+      <!-- 1h 谷值标注 -->
+      <circle cx="97" cy="218" r="4" fill="#b45309"/>
+      <line x1="97" y1="218" x2="130" y2="252" stroke="#b45309" stroke-width="1"/>
+      <text x="100" y="264" font-size="11" fill="#8a4307">生后1h可低至 1.8 mmol/L (32)</text>
+      <!-- AAP 干预线 -->
+      <line x1="70" y1="247" x2="97" y2="247" stroke="#cf4d3c" stroke-width="2" stroke-dasharray="4 3"/>
+      <line x1="97" y1="222" x2="235" y2="222" stroke="#cf4d3c" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="74" y="242" font-size="10.5" fill="#cf4d3c">AAP：0–4h &lt;25 干预</text>
+      <text x="150" y="217" font-size="10.5" fill="#cf4d3c">4–24h &lt;35 干预</text>
+      <!-- 本院线 49 -->
+      <line x1="152" y1="186" x2="730" y2="186" stroke="#b45309" stroke-width="2"/>
+      <text x="330" y="181" font-size="11.5" fill="#8a4307" font-weight="700">本院干预线 &lt;2.7 (49) · 适用 12h 后</text>
+      <!-- 本院目标带 63-108 -->
+      <rect x="152" y="107" width="578" height="79" fill="rgba(180,83,9,.07)"/>
+      <line x1="152" y1="150" x2="730" y2="150" stroke="#d97706" stroke-width="1.4" stroke-dasharray="6 4"/>
+      <text x="640" y="145" font-size="10.5" fill="#8a4307">本院目标带 3.5–6.0 (63–108)</text>
+      <!-- PES 持续期目标 70 -->
+      <line x1="565" y1="106" x2="730" y2="106" stroke="#2e9e5b" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="725" y="100" font-size="11" fill="#2e9e5b" text-anchor="end" font-weight="700">持续期 / HI 目标 &gt;70 (3.9)</text>
+      <!-- 图例 -->
+      <g font-size="11" fill="#5c4d33">
+        <rect x="70" y="310" width="16" height="12" fill="rgba(217,119,6,.16)" stroke="#b45309"/><text x="92" y="320">健康儿生理带（不干预）</text>
+        <line x1="280" y1="316" x2="300" y2="316" stroke="#cf4d3c" stroke-width="2" stroke-dasharray="4 3"/><text x="306" y="320">AAP 过渡期干预线</text>
+        <line x1="450" y1="316" x2="470" y2="316" stroke="#b45309" stroke-width="2"/><text x="476" y="320">本院干预线 2.7</text>
+        <line x1="70" y1="340" x2="90" y2="340" stroke="#d97706" stroke-width="1.4" stroke-dasharray="6 4"/><text x="96" y="344">本院目标带 3.5–6.0 mmol/L</text>
+        <line x1="290" y1="340" x2="310" y2="340" stroke="#2e9e5b" stroke-width="2" stroke-dasharray="6 4"/><text x="316" y="344">持续期目标 &gt;70 mg/dL</text>
+      </g>
+      <!-- 换算脚注 -->
+      <g font-size="10.5" fill="#99886a">
+        <text x="70" y="376">注：mg/dL = mmol/L × 18。曲线为示意（据 GLOW 研究均值±SD 与各指南阈值绘制），个体波动大。</text>
+        <text x="70" y="394">高危儿（IDM/SGA/LGA/早产/窒息）同一时龄的血糖更低、恢复更慢，见第③页筛查名单。</text>
+      </g>
+      <!-- 口径差 -->
+      <g>
+        <rect x="70" y="412" width="660" height="128" rx="10" fill="#fdf3e0" stroke="#e8c98f"/>
+        <text x="88" y="436" font-size="12.5" font-weight="800" fill="#8a4307">本院线在全球地图中的位置</text>
+        <text x="88" y="458" font-size="12" fill="#5c4d33">• 干预线 2.7（49）：比 AAP（25–35）/ CPS·NICE·中国（2.6）<tspan font-weight="700">更积极</tspan>，与「<tspan font-weight="700">&lt;3.5 即需喂养或治疗</tspan>」的监测触发一脉相承。</text>
+        <text x="88" y="480" font-size="12" fill="#5c4d33">• 目标下限 3.5（63）：介于 CPS 持续期目标（≥3.3/60）与 PES 确诊 HI 目标（&gt;3.9/70）之间。</text>
+        <text x="88" y="502" font-size="12" fill="#5c4d33">• 目标上限 6.0（108）：刻意封顶防高血糖——持续静脉高糖本身有渗透性脱水、反跳性高胰岛素的风险。</text>
+        <text x="88" y="524" font-size="12" fill="#5c4d33">• 适用范围：生后 12h 以后，或 12h 内反复低血糖；12h 内单次低值按过渡期处理，不进入本院流程。</text>
+      </g>
+    </svg>
+    <div class="cap"><b>图1 · 生后血糖的生理曲线与两套阈值。</b>先定时龄再读数：72h 内对照过渡期线，72h 后对照持续期线；本院金线（2.7 / 3.5–6.0）自 12h 起适用。</div>
+  </div>
+
+  <h3>全球干预阈值对照（含本院）</h3>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>指南 / 地区</th><th>过渡期干预线</th><th>过渡期目标</th><th>持续期 / HI 目标</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>AAP 2011（美）</td><td class="num">0–4h &lt;25<br>4–24h &lt;35</td><td class="num">0–4h &gt;40<br>4–24h &gt;45</td><td>未涉及</td><td>最宽松；未纳入凝胶</td></tr>
+        <tr><td>PES 2015（国际）</td><td class="num">0–48h &lt;50</td><td>—</td><td class="num">&gt;70 mg/dL</td><td>管持续 / 病理期</td></tr>
+        <tr><td>CPS 2019（加）</td><td class="num">&lt;2.6 mmol/L (47)</td><td class="num">≥2.6</td><td class="num">≥72h ≥3.3 (60)</td><td>凝胶一线</td></tr>
+        <tr><td>NICE / NHS（英）</td><td class="num">&lt;2.6 mmol/L</td><td class="num">≥2.6</td><td>—</td><td>颊黏膜凝胶一线</td></tr>
+        <tr><td>JHACH 早期 2025（CVICU）</td><td class="num">出生–4h &lt;50<br>4–24h &lt;55</td><td class="num">&gt;50</td><td>—</td><td>心脏术后新生儿用</td></tr>
+        <tr><td>JHACH 持续期 2024</td><td>—</td><td>—</td><td class="num">HI &gt;70</td><td>&gt;72h 仍 &lt;60 进入</td></tr>
+        <tr><td>中国 2021 共识</td><td class="num">&lt;2.6 mmol/L</td><td>—</td><td>—</td><td>≥35 周，21 条推荐</td></tr>
+        <tr><td>中国 2025 基层</td><td class="num">2.2–2.6 喂养<br>&lt;2.2 静脉</td><td>—</td><td>—</td><td>基层版 14 条</td></tr>
+        <tr class="hosp-row"><td><b>🏥 本院流程</b></td><td class="num"><b>&lt;2.7 mmol/L</b></td><td class="num"><b>3.5–6.0 mmol/L</b></td><td class="num"><b>3.5–6.0 mmol/L</b></td><td><b>仅用于生后 12h 后，或 12h 内反复低血糖</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">本院目标 3.5–6.0 mmol/L（63–108 mg/dL）介于 CPS 持续期目标（≥3.3）与 PES 确诊 HI 目标（&gt;3.9）之间，上限 6.0 用于避免高血糖。</p>
+
+  <h3>床旁换算带：mmol/L ↔ mg/dL</h3>
+  <div class="fx"><b>mg/dL = mmol/L × 18</b>　　mmol/L = mg/dL ÷ 18　（POCT 出 mmol/L，文献多用 mg/dL，×18 心算即通）</div>
+  <div class="conv">
+    <span class="cv hot"><b>1.4</b> ＝ 25 推糖线</span>
+    <span class="cv"><b>2.0</b> ＝ 36</span>
+    <span class="cv"><b>2.2</b> ＝ 40</span>
+    <span class="cv"><b>2.5</b> ＝ 45</span>
+    <span class="cv"><b>2.6</b> ＝ 47 全球干预线</span>
+    <span class="cv hosp"><b>2.7</b> ＝ 49 本院诊断线</span>
+    <span class="cv"><b>2.8</b> ＝ 50 留标本线</span>
+    <span class="cv"><b>3.3</b> ＝ 60</span>
+    <span class="cv hosp"><b>3.5</b> ＝ 63 本院目标下限</span>
+    <span class="cv"><b>3.9</b> ＝ 70 HI 目标线</span>
+    <span class="cv hosp"><b>6.0</b> ＝ 108 本院目标上限</span>
+  </div>
+
+  <div class="purplebox">
+    <div class="t">深化：为什么持续期目标要拉到 &gt;70？</div>
+    <ul>
+      <li><b>目前没有一条「低于它必然伤脑」的血糖线</b>——不能拿「没证据有害」当「安全」。较大儿童和成人：血糖 &lt;55 mg/dL 出现神经症状，&lt;50 mg/dL 可测出认知损害；生后 48h 后建议维持 &gt;60 mg/dL（AAP 口径）。</li>
+      <li><b>脑对葡萄糖的利用从 55–65 mg/dL 起开始受限</b>（成人文献外推）。</li>
+      <li>关键在<b>酮体</b>：正常低血糖时脑可切换到酮体供能；而 HI 患儿胰岛素分泌失调<b>同时抑制脂肪分解和酮体生成</b>——两个燃料开关一起被关掉，能量衰竭风险最大。所以 PES 要求疑似先天性低血糖疾病者维持 &gt;70 mg/dL。</li>
+    </ul>
+  </div>
+
+  <div class="redbox">
+    <div class="t">POCT 床旁血糖的三个坑</div>
+    <ul>
+      <li><b>全血 ≠ 血浆</b>：POCT 测的是全血，数值比实验室血浆葡萄糖<b>低约 15%</b>——拿 POCT 值直接套血浆口径的阈值会系统性误判。</li>
+      <li><b>延迟 = 掉数</b>：红细胞持续糖酵解，标本延迟处理血糖<b>每小时下降可达 6 mg/dL</b>。采了不马上送，等于白采。</li>
+      <li><b>确诊必须送血浆葡萄糖</b>，POCT 只用于筛查和床旁趋势；诊断性判读（尤其查因、HI 诊断）一律以实验室值为准。</li>
+    </ul>
+  </div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>72 小时分水岭：以内看时龄（喂），以外查病因（糖）；换算乘 18，POCT 低一成半。</div>
+
+</section>
+
+<!-- ================= 页3 筛查 ================= -->
+<section class="card page" id="page3">
+
+  <div class="card-head"><span class="step-no cyan">③</span><h2>筛查监测：谁要测、怎么测、什么时候停</h2></div>
+  <p class="card-sub">低血糖的新生儿症状常不特异，<b>等症状出现才测 = 等它已经伤了脑</b>。策略是主动筛查：对高危名单里的每个孩子按时点监测，而不是被动等待。</p>
+
+  <div class="hospbox">
+    <div class="t">🏥 本院适用范围（先看这个，别把过渡期孩子卷进流程）</div>
+    <ul>
+      <li>本流程适用于<b>生后 12 小时以后</b>的婴儿，或生后 12 小时内<b>反复低血糖</b>的患儿。</li>
+      <li>12h 内的单次低值按<b>过渡期</b>处理（喂养＋复测），不进入本院持续低血糖流程。</li>
+      <li>本院低血糖<b>症状清单</b>（出现任一即按有症状处理，见第④页）：精神萎、肌张力低、喂养困难、哭声低或高尖、惊厥、抖动/震颤、发绀、呼吸暂停、心率增快、心跳骤停、低体温。</li>
+    </ul>
+  </div>
+
+  <h3>高危儿名单（只有他们需要常规筛查）</h3>
+  <div class="riskwrap">
+    <span class="riskchip hot">IDM（含 GDM 母亲）</span>
+    <span class="riskchip hot">SGA / IUGR</span>
+    <span class="riskchip hot">LGA</span>
+    <span class="riskchip hot">&lt;37 周早产</span>
+    <span class="riskchip">围生期窒息</span>
+    <span class="riskchip">母亲拉贝洛尔（β 阻滞剂）</span>
+    <span class="riskchip">先天性低血糖家族史</span>
+    <span class="riskchip">遗传综合征（BWS / Turner）</span>
+    <span class="riskchip">中线缺陷</span>
+    <span class="riskchip">疑似败血症</span>
+    <span class="riskchip">低体温</span>
+    <span class="riskchip grey">JHACH 补充：母亲特布他林 / 口服降糖药</span>
+    <span class="riskchip grey">晚期早产 34–36⁺⁶ · &lt;34 周</span>
+    <span class="riskchip grey">母亲 1h 血糖筛查失败</span>
+  </div>
+
+  <h3>筛查时点：从第一口奶开始</h3>
+  <div class="tl">
+    <div class="tlrow"><span class="when">生后 1h 内</span><div class="what"><b>开始首次喂养</b>（母乳优先，促进酮体生成；不能经口者管饲）。JHACH 口径：完全不能喂养者，生后第 0 天即开始 D10 80 mL/kg/d 静脉输注。</div></div>
+    <div class="tlrow"><span class="when">喂养后 30min</span><div class="what"><b>POCT 测第一次血糖</b>。存在危险因素者生后 1h 即测（JHACH）。</div></div>
+    <div class="tlrow"><span class="when">之后</span><div class="what"><b>餐前 q2–3h</b>（全球口径）。</div></div>
+    <div class="tlrow"><span class="when">本院 24h 内</span><div class="what">前 24h 内出现过血糖 <b>&lt;3.5</b> → <b>喂养前或 q3h</b> 监测。</div></div>
+    <div class="tlrow"><span class="when">本院稳定后</span><div class="what">前 24h 血糖正常 ＋ 临床稳定 ＋ 糖速 &lt;12 mg/kg/min → 可延长至 <b>q6h</b>。</div></div>
+    <div class="tlrow"><span class="when">停测</span><div class="what"><b>IDM / LGA</b>：连续达标 <b>12h</b>；<b>SGA / 早产</b>：<b>24h</b>；&gt;24h 者：需<b>连续 2 次 &gt;50 mg/dL</b>（JHACH 口径）。</div></div>
+  </div>
+
+  <div class="pt green"><b>停测≠不管：</b>出院前任何一次「喂养间隔拉长 / 奶量下降 / 感染应激」，高危儿都可能复发低血糖——监测策略跟着临床状态走，不是测够次数就完。</div>
+
+  <h3>症状清单：两组记忆法</h3>
+  <div class="vargrid t2">
+    <div class="vartile f">
+      <div class="vh">神经系统组（低糖直接伤脑）</div>
+      <div class="vq">精神萎靡 · 肌张力低下 · 喂养困难 · 哭声低弱或高尖 · <b>惊厥</b> · 抖动/震颤。这一组提示脑已受累，<b>出现即按「有症状」处理</b>，不进入喂养观察。</div>
+    </div>
+    <div class="vartile e">
+      <div class="vh">自主神经 / 全身组</div>
+      <div class="vq">发绀 · 呼吸暂停 · 心率增快 · 心跳骤停 · 低体温。JHACH 补充：易激惹、不规则或快速呼吸、体温不稳定、喂养差。</div>
+    </div>
+  </div>
+  <div class="bluebox">
+    <div class="t">为什么不能等症状</div>
+    成人低血糖的交感症状（出汗、苍白、心悸、饥饿感）依赖完整的反调节反应，<b>新生儿这套反应很不成熟，表现常常只有「不太好」</b>：吃奶差、嗜睡、轻度震颤——极易归因于「正常的新生儿」。而 HI 患儿酮体生成被抑制、反调节反应迟钝，症状出现得更隐匿、更晚。所以对高危儿：<b>按时点筛查 > 等症状报警</b>；症状清单的价值在于「出现了就不容许再观察」，而不是「没出现就安全」。
+  </div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>高危儿喂后 30 分钟见分晓；前 24h 见 3.5 就加密（q3h），稳定才能放到 q6h。</div>
+
+</section>
+
+<!-- ================= 页4 急救 ================= -->
+<section class="card page" id="page4">
+
+  <div class="card-head"><span class="step-no red">④</span><h2>急救：有症状或极低值，先推糖</h2></div>
+  <p class="card-sub">这一步全球所有指南骨架一致，差别只有两点：<b>是否把葡萄糖凝胶列为一线</b>、<b>多早升级到静脉</b>。本院流程更积极：&lt;3.5 即需处理。</p>
+
+  <div class="redbox">
+    <div class="t">红旗：出现即最高优先级</div>
+    <b>惊厥、意识改变（昏迷/反应极度低下）、心跳骤停/严重心动过缓</b>——立即 D10W 2 mL/kg 静推，同步评估气道与呼吸；不要为了「先留标本」拖延推糖（可在推糖准备的同时快速采血，见第⑥页）。
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 760 610" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'PingFang SC',sans-serif">
+      <defs>
+        <marker id="arr4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a6a3a"/></marker>
+        <marker id="arr4r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cf4d3c"/></marker>
+      </defs>
+      <!-- A 血糖报告 -->
+      <rect x="250" y="16" width="260" height="42" rx="10" fill="#faf3e6" stroke="#b45309" stroke-width="1.6"/>
+      <text x="380" y="35" font-size="13.5" font-weight="800" fill="#8a4307" text-anchor="middle">血糖报告（POCT 初筛 / 血浆确诊）</text>
+      <text x="380" y="51" font-size="10.5" fill="#99886a" text-anchor="middle">数值 ×18 换算 · POCT 低约 15%</text>
+      <line x1="380" y1="58" x2="380" y2="84" stroke="#8a6a3a" stroke-width="1.6" marker-end="url(#arr4)"/>
+      <!-- B 症状菱形 -->
+      <polygon points="380,86 545,132 380,178 215,132" fill="#fff" stroke="#cf4d3c" stroke-width="2"/>
+      <text x="380" y="126" font-size="14" font-weight="800" fill="#cf4d3c" text-anchor="middle">有低血糖症状？</text>
+      <text x="380" y="147" font-size="10.5" fill="#5c4d33" text-anchor="middle">惊厥 · 意识改变 · 发绀 · 呼吸暂停</text>
+      <text x="380" y="163" font-size="10.5" fill="#5c4d33" text-anchor="middle">肌张力低 · 高尖哭声 · 低体温 · 心率快</text>
+      <!-- 是 → R1 -->
+      <line x1="215" y1="132" x2="145" y2="132" stroke="#cf4d3c" stroke-width="1.6"/>
+      <line x1="145" y1="132" x2="145" y2="190" stroke="#cf4d3c" stroke-width="1.6" marker-end="url(#arr4r)"/>
+      <text x="180" y="124" font-size="12" font-weight="800" fill="#cf4d3c">是</text>
+      <rect x="20" y="192" width="250" height="66" rx="10" fill="#fbeae7" stroke="#cf4d3c" stroke-width="2"/>
+      <text x="145" y="216" font-size="13.5" font-weight="800" fill="#b8402f" text-anchor="middle">立即静推（不等阶梯）</text>
+      <text x="145" y="236" font-size="12.5" font-weight="700" fill="#b8402f" text-anchor="middle">D10W 2 mL/kg iv ≥5 min</text>
+      <text x="145" y="252" font-size="10.5" fill="#8a6a5a" text-anchor="middle">＝ 200 mg/kg 葡萄糖 · 全球一致</text>
+      <line x1="145" y1="258" x2="145" y2="286" stroke="#cf4d3c" stroke-width="1.6" marker-end="url(#arr4r)"/>
+      <rect x="20" y="288" width="250" height="66" rx="10" fill="#fbeae7" stroke="#cf4d3c" stroke-width="2"/>
+      <text x="145" y="310" font-size="12.5" font-weight="800" fill="#b8402f" text-anchor="middle">推完立即接持续静脉糖输注</text>
+      <text x="145" y="328" font-size="11.5" fill="#8a6a5a" text-anchor="middle">本院：糖速直接上 10 mg/kg/min</text>
+      <text x="145" y="345" font-size="11" fill="#8a6a5a" text-anchor="middle">30min 复查 → 之后每餐前或 q3h</text>
+      <!-- 否 ↓ -->
+      <line x1="380" y1="178" x2="380" y2="206" stroke="#8a6a3a" stroke-width="1.6"/>
+      <line x1="380" y1="206" x2="560" y2="206" stroke="#8a6a3a" stroke-width="1.6"/>
+      <line x1="560" y1="206" x2="560" y2="232" stroke="#8a6a3a" stroke-width="1.6" marker-end="url(#arr4)"/>
+      <text x="470" y="199" font-size="12" font-weight="800" fill="#5c4d33">否（无症状）</text>
+      <!-- D2 极低值 -->
+      <polygon points="560,234 675,276 560,318 445,276" fill="#fff" stroke="#d96c2f" stroke-width="2"/>
+      <text x="560" y="272" font-size="13" font-weight="800" fill="#d96c2f" text-anchor="middle">BG &lt;1.4 mmol/L？</text>
+      <text x="560" y="291" font-size="10.5" fill="#5c4d33" text-anchor="middle">(&lt;25 mg/dL)</text>
+      <line x1="445" y1="276" x2="300" y2="276" stroke="#d96c2f" stroke-width="1.6"/>
+      <line x1="300" y1="276" x2="300" y2="270" stroke="#d96c2f" stroke-width="1.6"/>
+      <line x1="300" y1="276" x2="276" y2="276" stroke="#d96c2f" stroke-width="1.6" marker-end="url(#arr4r)"/>
+      <text x="360" y="268" font-size="12" font-weight="800" fill="#d96c2f">是（同样直接推糖）</text>
+      <!-- 否 ↓ D3 -->
+      <line x1="560" y1="318" x2="560" y2="346" stroke="#8a6a3a" stroke-width="1.6" marker-end="url(#arr4)"/>
+      <text x="572" y="338" font-size="12" font-weight="800" fill="#5c4d33">否</text>
+      <polygon points="560,348 675,390 560,432 445,390" fill="#fff" stroke="#2456c4" stroke-width="2"/>
+      <text x="560" y="384" font-size="13" font-weight="800" fill="#2456c4" text-anchor="middle">病情稳定且能喂养？</text>
+      <text x="560" y="404" font-size="10.5" fill="#5c4d33" text-anchor="middle">吸吮有力 · 无呼吸循环不稳</text>
+      <line x1="445" y1="390" x2="280" y2="390" stroke="#2456c4" stroke-width="1.6"/>
+      <line x1="280" y1="390" x2="280" y2="360" stroke="#2456c4" stroke-width="1.6"/>
+      <line x1="280" y1="360" x2="276" y2="360" stroke="#2456c4" stroke-width="1.6" marker-end="url(#arr4r)"/>
+      <text x="358" y="374" font-size="11.5" font-weight="800" fill="#2456c4">否（不能喂养/不稳→推糖）</text>
+      <!-- 是 ↓ 喂养 -->
+      <line x1="560" y1="432" x2="560" y2="460" stroke="#8a6a3a" stroke-width="1.6" marker-end="url(#arr4)"/>
+      <text x="572" y="452" font-size="12" font-weight="800" fill="#2e9e5b">是</text>
+      <rect x="430" y="462" width="290" height="66" rx="10" fill="#e6f4eb" stroke="#2e9e5b" stroke-width="2"/>
+      <text x="575" y="486" font-size="13" font-weight="800" fill="#1f7a45" text-anchor="middle">先喂养 ± 葡萄糖凝胶*</text>
+      <text x="575" y="504" font-size="11.5" fill="#3a6a4d" text-anchor="middle">凝胶：40% GS 0.5 mL/kg 涂颊黏膜＋即喂一次奶</text>
+      <text x="575" y="520" font-size="11.5" fill="#3a6a4d" text-anchor="middle">（本院流程未纳入凝胶，见下方口径）</text>
+      <rect x="430" y="538" width="290" height="58" rx="10" fill="#fff" stroke="#cde8d8" stroke-width="1.5"/>
+      <text x="575" y="558" font-size="11.5" font-weight="700" fill="#1f7a45" text-anchor="middle">30 min 复查：≥3.5 → 喂养前 / q3h 续监测</text>
+      <text x="575" y="576" font-size="11.5" fill="#8a6a5a" text-anchor="middle">仍低 → 回到推糖 / 持续输注（升级）</text>
+      <!-- 左下 口径盒 -->
+      <rect x="20" y="382" width="390" height="214" rx="10" fill="#fdf3e0" stroke="#e8c98f"/>
+      <text x="36" y="406" font-size="12.5" font-weight="800" fill="#8a4307">🏥 本院急救口径（与图中全球流程的差异）</text>
+      <text x="36" y="428" font-size="11.5" fill="#5c4d33">• BG &lt;2.7 且<tspan font-weight="800" fill="#8a4307">病情稳定可喂养</tspan> → 先喂养，30min 复查；</text>
+      <text x="36" y="447" font-size="11.5" fill="#5c4d33">• 病情不稳或不能喂养 → 2 mL/kg 10% GS ivgtt 5min，</text>
+      <text x="36" y="465" font-size="11.5" fill="#5c4d33">　随后持续 10% GS 输注或提糖速<tspan font-weight="800" fill="#8a4307">至 10 mg/kg/min</tspan>；</text>
+      <text x="36" y="484" font-size="11.5" fill="#5c4d33">• <tspan font-weight="800" fill="#8a4307">BG &lt;3.5 即需即时喂养或治疗</tspan>（比全球 2.6/50 更积极）；</text>
+      <text x="36" y="502" font-size="11.5" fill="#5c4d33">• 复查：30min 一次 → 稳定后每餐前或 q3h；</text>
+      <text x="36" y="520" font-size="11.5" fill="#5c4d33">• 低血糖发生时立即留实验室检查（见第⑥页）；</text>
+      <text x="36" y="538" font-size="11.5" fill="#b8402f" font-weight="700">• 凝胶未纳入本院流程（与 CPS/NICE 主要差异）。</text>
+      <text x="36" y="562" font-size="10.5" fill="#99886a">JHACH（CVICU）分级参考：出生–4h BG 25–50 → 复喂＋30min 复查；</text>
+      <text x="36" y="580" font-size="10.5" fill="#99886a">&lt;25 → D10 IV 2 mL/kg；任何严重症状且 BG≤50 → 考虑 D10 IV。</text>
+    </svg>
+    <div class="cap"><b>图2 · 急救决策流程。</b>红色路径不附加任何条件：症状或 &lt;1.4 mmol/L，先推糖再说。喂养路径每一步都以 30min 复查为节拍器，不达标即升级。</div>
+  </div>
+
+  <h3>第一级：喂养（所有指南一致的第一步）</h3>
+  <div class="pt blue"><b>生后 1h 内开始</b>，母乳优先——母乳促进<b>酮体生成</b>，酮体是低血糖时脑的替代能源；不能经口者管饲。</div>
+
+  <h3>第二级：葡萄糖凝胶（全球一线，本院未纳入）</h3>
+  <div class="dcard c1">
+    <div class="dh">40% 葡萄糖凝胶（Dextrogel 级证据）<span class="sub">证据等级 1b</span></div>
+    <div class="db">
+      <ul>
+        <li><b>用法</b>：0.5 mL/kg（＝200 mg/kg），擦干口腔后涂<b>颊黏膜</b>，<b>同时喂一次奶</b>，30 min 复查。</li>
+        <li><b>证据</b>：Sugar Babies 试验（Lancet 2013）——治疗失败率、NICU 入院率双降；CHYLD 队列 4.5 年随访未见远期危害。</li>
+        <li><b>列为一线的指南</b>：CPS 2019、NICE/NHS、UCSF 2023、土耳其 2019；<b>AAP 2011 未纳入</b>（发布更早）。</li>
+        <li><b>🏥 本院流程未将凝胶纳入</b>——这是与 CPS/NICE 的主要差异，可考虑科内讨论补充；在凝胶获批可用之前，本院对应动作＝直接喂养＋30min 复查，不达标升级静脉。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>第三级：静脉糖（bolus ＋ 持续输注）</h3>
+  <div class="fx"><b>Bolus</b>：D10W <b>2 mL/kg</b> 静推 ≥5 min（＝200 mg/kg）——全球一致，不用 D25/D50 高渗糖推注（反跳性高胰岛素＋静脉损伤，属补充口径）<br><b>维持</b>：D10W 80–100 mL/kg/d ≈ <b>GIR 5–8</b> mg/kg/min（本院直接起步 10，见第⑤页）　<b>复查</b>：30–60 min，每次上调 <b>+1–2</b> mg/kg/min<br><b>外周 vs 中心</b>：CPS 明确外周可至 D20；总液量 ≤100–150 mL/kg/d（加浓方法见第⑤页配液表）</div>
+
+  <div class="pt red"><b>推糖三件套缺一不可：</b>① ≥5 分钟推完（快速推会诱发反跳性高胰岛素）；② 推完<b>立刻接持续输注</b>（单次 bolus 的糖 20–30 分钟就烧完，不接维持＝坐等反跳）；③ 30 min 复查决定下一步。</div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>有症状或 &lt;1.4：不等喂养，2 mL/kg 五分钟推完，推完就接维持；本院更积极——3.5 就要动。</div>
+
+</section>
+
+<!-- ================= 页5 糖速阶梯 ================= -->
+<section class="card page" id="page5">
+
+  <div class="card-head"><span class="step-no amber">⑤</span><h2>持续输注：GIR 阶梯与加浓配液</h2></div>
+  <p class="card-sub">静脉糖管理的全部数学浓缩成一个公式、两张表、一个阶梯。<b>本院的特色是 GIR 阶梯明确量化：10→12→15→18，每档都有明确的升档触发条件。</b></p>
+
+  <div class="fx"><b>GIR（mg/kg/min）＝ 糖浓度(g/dL) × 速率(mL/kg/d) ÷ 144</b><br>例：D10W 100 mL/kg/d → 10×100÷144 ≈ <b>6.9 mg/kg/min</b>　（144＝1440 min/d ÷ 10，把 g/dL·mL/kg/d 折成 mg/kg/min 的换算常数）</div>
+
+  <h3>GIR 速查表（mg/kg/min）——值班时直接查，不用算</h3>
+  <div class="tscroll">
+    <table class="slim">
+      <thead><tr><th>速率 mL/kg/d ↓ / 浓度 →</th><th class="num">D10W</th><th class="num">D12.5%</th><th class="num">D15%</th><th class="num">D20%</th></tr></thead>
+      <tbody>
+        <tr><td>60</td><td class="num">4.2</td><td class="num">5.2</td><td class="num">6.3</td><td class="num">8.3</td></tr>
+        <tr><td>80</td><td class="num">5.6</td><td class="num">6.9</td><td class="num">8.3</td><td class="num">11.1</td></tr>
+        <tr><td>100</td><td class="num">6.9</td><td class="num">8.7</td><td class="num">10.4</td><td class="num">13.9</td></tr>
+        <tr class="hosp-row"><td><b>120</b></td><td class="num"><b>8.3</b></td><td class="num"><b>10.4</b></td><td class="num"><b>12.5</b></td><td class="num"><b>16.7</b></td></tr>
+        <tr><td>150</td><td class="num">10.4</td><td class="num">13.0</td><td class="num">15.6</td><td class="num">20.8</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="redbox">
+    <div class="t">反查要点：为什么 GIR 上 10 就必须加浓</div>
+    要用 D10W 达到 GIR 10，需要 <b>144 mL/kg/d</b>——远超新生儿 100–150 mL/kg/d 的总液量上限，<b>液量先超限，糖还没到位</b>。所以：<br>• 限液 100 mL/kg/d 要 GIR 10 → 需要浓度 10×144÷100 ≈ <b>D14.4，即配 D15</b>；<br>• 限液 120 mL/kg/d 要 GIR 10 → <b>D12</b>；<br>• 结论：<b>本院起步 GIR 10 的医嘱，几乎必然伴随一张加浓配液单</b>——这是两件事，不是一个「糖速」。
+  </div>
+
+  <h3>加浓配液表（以 D10 为基液，每 100 mL 终体积）</h3>
+  <div class="tscroll">
+    <table class="slim">
+      <thead><tr><th>目标浓度</th><th class="num">抽出的 D10</th><th class="num">注入的 50% GS</th><th>终体积</th><th>渗透压参考</th></tr></thead>
+      <tbody>
+        <tr><td><b>D12.5%</b></td><td class="num">6.25 mL</td><td class="num">6.25 mL</td><td class="num">100 mL</td><td class="num">≈631 mOsm/L</td></tr>
+        <tr><td><b>D15%</b></td><td class="num">12.5 mL</td><td class="num">12.5 mL</td><td class="num">100 mL</td><td class="num">≈758 mOsm/L</td></tr>
+        <tr><td><b>D20%</b></td><td class="num">25 mL</td><td class="num">25 mL</td><td class="num">100 mL</td><td class="num">≈1010 mOsm/L</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">配法规则：<b>从基液中抽出等量液体、再注入等量 50% GS</b>，终体积不变、糖浓度精确。通式：需 50% GS (mL) ＝（目标浓度 − 10）× 终体积 ÷ 40。渗透压＝克数×5.5（无水葡萄糖 mOsm/mmol 换算约 5.5 mOsm/g），D20 已超外周静脉常规耐受（≈900 mOsm/L），<b>CPS 口径外周可至 D20</b>，实际用前请核对本院静疗规范；高浓度糖建议尽量走中心静脉，并避光监测渗漏。</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'PingFang SC',sans-serif">
+      <defs>
+        <marker id="arr5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cf4d3c"/></marker>
+        <marker id="arr5g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e9e5b"/></marker>
+      </defs>
+      <text x="30" y="34" font-size="14" font-weight="800" fill="#8a4307">🏥 本院 GIR 阶梯（目标 3.5–6.0 mmol/L）</text>
+      <!-- 胰高糖素注释 -->
+      <rect x="40" y="56" width="300" height="86" rx="10" fill="#e6f4eb" stroke="#2e9e5b" stroke-width="1.8" stroke-dasharray="6 4"/>
+      <text x="56" y="80" font-size="12.5" font-weight="800" fill="#1f7a45">胰高糖素 10–20 µg/kg/hr 持续输注</text>
+      <text x="56" y="100" font-size="11.5" fill="#3a6a4d">高度怀疑 HI（一次&lt;2.7 或 48h 两次 2.7–3.4）</text>
+      <text x="56" y="118" font-size="11.5" fill="#3a6a4d">时即开始——<tspan font-weight="700">在 GIR 升到 12 之前</tspan>，比 JHACH</text>
+      <text x="56" y="134" font-size="11.5" fill="#3a6a4d">（GIR &gt;10–12 才上）更早启动</text>
+      <line x1="200" y1="142" x2="209" y2="195" stroke="#2e9e5b" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arr5g)"/>
+      <!-- 四级台阶 -->
+      <rect x="55" y="265" width="145" height="120" rx="8" fill="#fdf3e0" stroke="#b45309" stroke-width="1.8"/>
+      <text x="127" y="308" font-size="22" font-weight="800" fill="#8a4307" text-anchor="middle">GIR 10</text>
+      <text x="127" y="332" font-size="11.5" fill="#5c4d33" text-anchor="middle">本院起始档</text>
+      <text x="127" y="352" font-size="10.5" fill="#99886a" text-anchor="middle">全球起步 5–8</text>
+      <text x="127" y="370" font-size="10.5" fill="#99886a" text-anchor="middle">(D10 80–100 mL/kg/d)</text>
+      <rect x="215" y="200" width="145" height="185" rx="8" fill="#fbeadb" stroke="#b45309" stroke-width="1.8"/>
+      <text x="287" y="248" font-size="22" font-weight="800" fill="#8a4307" text-anchor="middle">GIR 12</text>
+      <text x="287" y="272" font-size="11" fill="#5c4d33" text-anchor="middle">＋胰高糖素泵入</text>
+      <text x="287" y="290" font-size="10.5" fill="#99886a" text-anchor="middle">(10–20 µg/kg/hr)</text>
+      <rect x="375" y="135" width="150" height="250" rx="8" fill="#f8dfc4" stroke="#b45309" stroke-width="1.8"/>
+      <text x="450" y="180" font-size="22" font-weight="800" fill="#8a4307" text-anchor="middle">GIR 15</text>
+      <text x="450" y="204" font-size="12" font-weight="700" fill="#8a4307" text-anchor="middle">＋开始二氮嗪</text>
+      <text x="450" y="224" font-size="11" fill="#5c4d33" text-anchor="middle">10 mg/kg/d q8h 起</text>
+      <text x="450" y="242" font-size="11" fill="#5c4d33" text-anchor="middle">＋双克 5 mg/kg/d q12h</text>
+      <text x="450" y="264" font-size="10.5" fill="#99886a" text-anchor="middle">每 48h 加 2.5</text>
+      <text x="450" y="281" font-size="10.5" fill="#99886a" text-anchor="middle">最大 15 mg/kg/d</text>
+      <text x="450" y="303" font-size="10.5" fill="#99886a" text-anchor="middle">确诊 HI 可早期应用</text>
+      <rect x="545" y="75" width="160" height="310" rx="8" fill="#f3cdb0" stroke="#b45309" stroke-width="2"/>
+      <text x="625" y="120" font-size="22" font-weight="800" fill="#8a4307" text-anchor="middle">GIR 18</text>
+      <text x="625" y="146" font-size="11.5" font-weight="700" fill="#8a4307" text-anchor="middle">二氮嗪最大量仍无效</text>
+      <text x="625" y="170" font-size="11" fill="#5c4d33" text-anchor="middle">→ 停二氮嗪＋双克</text>
+      <text x="625" y="190" font-size="11" fill="#5c4d33" text-anchor="middle">→ 换奥曲肽 15 µg/kg/d q8h</text>
+      <text x="625" y="214" font-size="10.5" fill="#99886a" text-anchor="middle">每 3 天加 5，最大 30</text>
+      <text x="625" y="238" font-size="10.5" fill="#99886a" text-anchor="middle">＋基因检测（ABCC8/KCNJ11，</text>
+      <text x="625" y="255" font-size="10.5" fill="#99886a" text-anchor="middle">患儿及父母）</text>
+      <text x="625" y="279" font-size="10.5" fill="#99886a" text-anchor="middle">奥曲肽最大量仍无效</text>
+      <text x="625" y="296" font-size="10.5" fill="#99886a" text-anchor="middle">→ 18F-DOPA 扫描＋外科</text>
+      <!-- 升档触发 chips（置于空白区，避免压住台阶文字） -->
+      <g>
+        <line x1="185" y1="207" x2="203" y2="243" stroke="#cf4d3c" stroke-width="1.8" marker-end="url(#arr5)"/>
+        <rect x="24" y="155" width="170" height="52" rx="9" fill="#fbeae7" stroke="#cf4d3c" stroke-width="1.5"/>
+        <text x="109" y="176" font-size="11" font-weight="800" fill="#b8402f" text-anchor="middle">升档触发：一次 BG &lt;2.7</text>
+        <text x="109" y="194" font-size="11" font-weight="800" fill="#b8402f" text-anchor="middle">或 48h 内两次 2.7–3.4</text>
+      </g>
+      <g>
+        <line x1="336" y1="174" x2="362" y2="168" stroke="#cf4d3c" stroke-width="1.8" marker-end="url(#arr5)"/>
+        <rect x="218" y="152" width="118" height="44" rx="9" fill="#fbeae7" stroke="#cf4d3c" stroke-width="1.5"/>
+        <text x="277" y="170" font-size="10.5" font-weight="800" fill="#b8402f" text-anchor="middle">同一触发持续存在</text>
+        <text x="277" y="187" font-size="10.5" font-weight="800" fill="#b8402f" text-anchor="middle">（加档＋启动二氮嗪）</text>
+      </g>
+      <g>
+        <line x1="470" y1="62" x2="532" y2="93" stroke="#cf4d3c" stroke-width="1.8" marker-end="url(#arr5)"/>
+        <rect x="380" y="12" width="158" height="50" rx="9" fill="#fbeae7" stroke="#cf4d3c" stroke-width="1.5"/>
+        <text x="459" y="32" font-size="11" font-weight="800" fill="#b8402f" text-anchor="middle">二氮嗪最大量仍无效</text>
+        <text x="459" y="49" font-size="11" font-weight="800" fill="#b8402f" text-anchor="middle">（或出现肺水肿）</text>
+      </g>
+      <!-- 底注 -->
+      <text x="30" y="412" font-size="11" fill="#99886a">全球口径：GIR 30–60min 复查一次，每次上调 +1–2 mg/kg/min；本院为明确跳档设计，每档都有客观触发条件，床旁不需要猜「要不要加」。</text>
+      <text x="30" y="430" font-size="11" fill="#99886a">总液量上限 100–150 mL/kg/d；外周糖浓度上限见配液表注。胰高糖素只能配含糖液（D5W），盐水/肝素中结晶。</text>
+    </svg>
+    <div class="cap"><b>图3 · 本院 GIR 阶梯。</b>阶梯不是「加糖速」这么简单：12 档起胰高糖素桥接，15 档起二氮嗪治本，18 档意味着要重新查因、上二线药并走基因-外科路径。触发条件只有一条：一次 &lt;2.7 或 48h 两次 2.7–3.4。</div>
+  </div>
+
+  <div class="hospbox">
+    <div class="t">🏥 本院阶梯口径速记</div>
+    <ul>
+      <li><b>起始</b>：静推后持续 10% GS 输注，糖速直接<b>至 10 mg/kg/min</b>（全球起步 5–8，本院更积极）。</li>
+      <li><b>10 → 12</b>：一次 BG &lt;2.7 或 48h 内两次 2.7–3.4；高度怀疑 HI 时<b>此档之前</b>即开始胰高糖素 10–20 µg/kg/hr。</li>
+      <li><b>12 → 15</b>：仍触发 → 加到 15，<b>同时开始二氮嗪</b> 10 mg/kg/d q8h ＋ 双克 5 mg/kg/d q12h。</li>
+      <li><b>15 → 18</b>：二氮嗪最大量仍无效 → 加到 18，并进入二线/基因/外科路径（第⑦页）。</li>
+    </ul>
+  </div>
+
+  <div class="pt"><b>复查节拍：</b>调档后 30 min 首查 → 稳定后每餐前或 q3h；医嘱里写清「糖速、浓度、液量」三个数，交接班只对这三个数。</div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>144 是钥匙：D10 想上 10 档要 144 mL/kg/d——不可能，所以必须加浓；10→12→15→18，一档一个理由。</div>
+
+</section>
+
+<!-- ================= 页6 查因 ================= -->
+<section class="card page" id="page6">
+
+  <div class="card-head"><span class="step-no purple">⑥</span><h2>查因：什么时候留标本、怎么解读</h2></div>
+  <p class="card-sub">查因不是「开全套化验」，而是<b>在正确的时间窗（血糖 &lt;50 mg/dL、补糖之前）留对的管</b>。时机错了，全套化验作废。</p>
+
+  <h3>查因触发条件（满足其一就动手）</h3>
+  <ul class="chk">
+    <li><b>&gt;72h</b> 血糖仍 &lt;60 mg/dL（&lt;3.3 mmol/L）——进入持续期还降不住；</li>
+    <li><b>GIR 需 &gt;10–12 mg/kg/min</b> 才能维持——本院阶梯 12 档即对应；</li>
+    <li><b>静脉糖已用 &gt;7 天</b>——远超生理过渡期；</li>
+    <li>反复 &lt;45–50 mg/dL（&lt;2.5–2.8 mmol/L）；</li>
+    <li><b>早产儿</b>全肠内喂养后仍 &lt;60 mg/dL × 2 次；</li>
+    <li>临床怀疑遗传病 / 综合征（BWS、Turner、中线缺陷、家族史）。</li>
+  </ul>
+  <div class="riskwrap">
+    <span class="riskchip grey">JHACH CVICU 补充触发：连续三次 &lt;45 mg/dL</span>
+    <span class="riskchip grey">已使用胰高糖素</span>
+    <span class="riskchip grey">静脉输液 &gt;7 天</span>
+  </div>
+
+  <div class="redbox">
+    <div class="t">铁律：时机在「补糖之前」</div>
+    <b>血糖 &lt;50 mg/dL（2.8 mmol/L）的那一刻、补糖之前</b>留取关键标本——补糖后胰岛素被纠正、酮体被动用，结果全部失真。<b>采血困难时的优先顺序：葡萄糖 → β-羟丁酸 → 胰岛素 → 皮质醇</b>。确诊性数值必须送<b>血浆葡萄糖</b>（POCT 只做初筛）。
+  </div>
+
+  <h3>标本清单：必查 6 项 ＋ 按需 7 项</h3>
+  <div class="tscroll">
+    <table class="slim">
+      <thead><tr><th>层级</th><th>项目</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td><b>必查</b></td><td>血浆葡萄糖</td><td>确认低血糖真实存在（全血 POCT 低 ~15%）</td></tr>
+        <tr><td><b>必查</b></td><td>胰岛素 · β-羟丁酸 · 游离脂肪酸</td><td>HI 三联，见下表判读</td></tr>
+        <tr><td><b>必查</b></td><td>皮质醇 · 生长激素</td><td>垂体-肾上腺轴</td></tr>
+        <tr><td>按需</td><td>乳酸 · 碳酸氢根 · C 肽 · 血氨 · 酰基肉碱 · 尿有机酸 · IGFBP-1</td><td>怀疑代谢病/需鉴别时加做</td></tr>
+        <tr class="hosp-row"><td><b>🏥 本院</b></td><td>血氨、血/尿串联质谱</td><td><b>可根据具体情况考虑，且不需要在低血糖发生时采集</b>（不像必查 6 项受时机约束）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>判读表：血糖 &lt;50 mg/dL 时「应该见到」什么</h3>
+  <div class="tscroll">
+    <table class="slim">
+      <thead><tr><th>项目</th><th class="num">低血糖时应见到</th><th>反常（应见到却没有）提示</th></tr></thead>
+      <tbody>
+        <tr><td>胰岛素</td><td class="num">&lt;2 µIU/mL</td><td>低血糖时仍可检出（&gt;2）→ <b>HI</b>；但敏感性仅 ~82%，<b>阴性不能排除</b></td></tr>
+        <tr><td>β-羟丁酸（酮体）</td><td class="num">&gt;2 mmol/L</td><td>&lt;1.8 → 脂肪分解/生酮被抑制 → <b>HI（敏感性 100%，最灵敏）</b></td></tr>
+        <tr><td>游离脂肪酸</td><td class="num">&gt;2 mmol/L</td><td>&lt;1.7 → 脂解被抑制 → <b>HI（敏感性 87%）</b></td></tr>
+        <tr><td>皮质醇</td><td class="num">&gt;10 mcg/dL</td><td>&lt;10 → <b>肾上腺皮质功能不全</b>（先做 ACTH 兴奋试验再确诊）</td></tr>
+        <tr><td>生长激素</td><td class="num">&gt;7 ng/mL</td><td>&lt;7 → <b>GH 缺乏</b>（垂体轴）</td></tr>
+        <tr><td>乳酸</td><td class="num">0.6–2 mmol/L</td><td>升高 → <b>糖原贮积病 / 糖异生缺陷</b></td></tr>
+        <tr><td>碳酸氢根</td><td class="num">15–20 mmol/L</td><td>低 + 乳酸高 → 代谢病线索</td></tr>
+        <tr><td>C 肽</td><td class="num">&lt;0.5 ng/mL</td><td>不适当升高 → 与胰岛素同向支持 HI（外源性胰岛素时 C 肽低）</td></tr>
+        <tr><td>血氨</td><td class="num">&lt;33 µmol/L</td><td>升高 → 尿素循环障碍方向</td></tr>
+        <tr><td>IGFBP-1</td><td class="num">&gt;180 ng/mL</td><td>低 → 胰岛素抑制其生成 → 支持 HI</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>三个方向的解读（拿到结果先归哪个筐）</h3>
+  <div class="tri">
+    <div class="tricard crit">
+      <div class="th">① 高胰岛素血症（最常见）</div>
+      <div class="bd"><ul>
+        <li><b>三联</b>：胰岛素 &gt;2 µIU/mL（或「不被抑制」）＋ β-OHB &lt;1.8 ＋ FFA &lt;1.7</li>
+        <li><b>酮体和 FFA 最诚实</b>：敏感性 100% / 87%；胰岛素可假阴性——<b>低值不排除 HI</b></li>
+        <li>伴低酮＋低 FFA ＝ 本院「高度怀疑 HI」的化验证据</li>
+      </ul></div>
+    </div>
+    <div class="tricard mid">
+      <div class="th">② 垂体 / 肾上腺功能低下</div>
+      <div class="bd"><ul>
+        <li>皮质醇 &lt;10 → <b>先做 ACTH 兴奋试验</b>再确诊；GH &lt;7</li>
+        <li>伴随线索：<b>小阴茎、中线缺陷（唇腭裂）</b>、身材矮小更支持</li>
+        <li>治疗方向：氢化可的松替代（第⑧页）</li>
+      </ul></div>
+    </div>
+    <div class="tricard high">
+      <div class="th">③ 遗传代谢病</div>
+      <div class="bd"><ul>
+        <li><b>乳酸升高</b> → 糖原贮积病 / 糖异生缺陷（肝大是线索）</li>
+        <li><b>尿有机酸 / 酰基肉碱异常</b> → 脂肪酸氧化缺陷（低酮性低血糖）</li>
+        <li><b>高氨</b> → 尿素循环障碍方向 → 代谢/遗传专科会诊</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="hospbox">
+    <div class="t">🏥 本院 HI 判读口径（比 PES 更宽松、更可操作）</div>
+    <ul>
+      <li><b>HI 定义</b>：低血糖发生时（BG &lt;2.7）血清胰岛素<b>仍处于正常范围内或升高</b>——不要求绝对值 &gt;2，「不被抑制」即算。</li>
+      <li><b>化验旁证</b>：低血糖合并低酮、低游离脂肪酸。</li>
+      <li><b>升级治疗（高度怀疑 HI）的触发</b>：一次 BG &lt;2.7，或 <b>48h 内两次 BG 2.7–3.4 mmol/L</b>——灰区连续两次的设计，比单纯看 GIR 更直观、更早。</li>
+      <li><b>排除</b>：24h 内血糖均 ≥3.5 → <b>不考虑 HI</b>，按过渡期处理即可。</li>
+    </ul>
+  </div>
+
+  <div class="case">
+    <div class="t">胰高糖素刺激试验（床旁可做的「功能性 HI 诊断」）</div>
+    <ol>
+      <li><b>指征</b>：临床怀疑 HI 但血清胰岛素水平低，或无法获取关键标本时。</li>
+      <li><b>方案</b>：BG &lt;50 mg/dL 时，胰高糖素 <b>1 mg IV/IM/SQ</b>，之后每 10 min 测血糖 ×4 次。</li>
+      <li><b>阳性</b>：升幅 <b>&gt;30 mg/dL</b>——提示肝内有糖原储备且被动员，低血糖原因是「胰岛素过多把糖锁进肝脏」→ 支持 HI。</li>
+      <li><b>注意</b>：作用约 60 min；给药后可出现<b>反跳性低血糖</b>，试验后继续监测。</li>
+    </ol>
+  </div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>&lt;50 的那一刻是唯一窗口：补糖之前，六管全留；酮体 FFA 最诚实，胰岛素阴性不翻案。</div>
+
+</section>
+
+<!-- ================= 页7 HI用药 ================= -->
+<section class="card page" id="page7">
+
+  <div class="card-head"><span class="step-no green">⑦</span><h2>高胰岛素血症用药：桥接 → 治本 → 二线</h2></div>
+  <p class="card-sub">确诊 HI 后目标血糖 <b>&gt;70 mg/dL（&gt;3.9 mmol/L）</b>。用药顺序全球一致：<b>胰高糖素（桥接）→ 二氮嗪（一线治本）→ 奥曲肽（二线）→ 基因 / 外科</b>。本院的特色是把这套顺序直接焊进 GIR 阶梯（第⑤页）。</p>
+
+  <div class="tealbox">
+    <div class="t">为什么是这个顺序</div>
+    <b>胰高糖素</b>动用肝糖原救急、不治本，给二氮嗪起效留出 2–4 天窗口；<b>二氮嗪</b>是唯一 FDA 批准的 HI 治疗药，直接作用于病因（让 β 细胞停跳）；<b>奥曲肽</b>只用于二氮嗪失败或有禁忌者——它有快速耐受和 NEC 两个硬伤。二氮嗪起效慢、水肿重，所以必须有双克和限液护法。
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'PingFang SC',sans-serif">
+      <defs>
+        <marker id="arr7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a6a3a"/></marker>
+      </defs>
+      <text x="30" y="30" font-size="14" font-weight="800" fill="#8a4307">药物作用位点总图：一个病因（β 细胞），三个器官靶点</text>
+      <!-- β细胞 -->
+      <rect x="30" y="52" width="420" height="270" rx="14" fill="#faf6ec" stroke="#b45309" stroke-width="1.8"/>
+      <text x="48" y="76" font-size="13" font-weight="800" fill="#8a4307">胰腺 β 细胞（病因所在）</text>
+      <text x="48" y="100" font-size="12" fill="#5c4d33">血糖 ↑ → 代谢 ↑ → <tspan font-weight="800">ATP ↑</tspan></text>
+      <!-- 膜 -->
+      <line x1="55" y1="200" x2="425" y2="200" stroke="#8a4307" stroke-width="3" stroke-linecap="round"/>
+      <text x="425" y="192" font-size="10.5" fill="#99886a" text-anchor="end">细胞膜</text>
+      <!-- K-ATP 通道 -->
+      <rect x="90" y="182" width="86" height="36" rx="7" fill="#fff" stroke="#b45309" stroke-width="2"/>
+      <text x="133" y="205" font-size="11.5" font-weight="800" fill="#8a4307" text-anchor="middle">K-ATP 通道</text>
+      <!-- Ca 通道 -->
+      <rect x="240" y="182" width="76" height="36" rx="7" fill="#fff" stroke="#2456c4" stroke-width="2"/>
+      <text x="278" y="205" font-size="11.5" font-weight="800" fill="#2456c4" text-anchor="middle">Ca²⁺ 通道</text>
+      <!-- SSTR 受体 -->
+      <rect x="352" y="182" width="66" height="36" rx="7" fill="#fff" stroke="#6d4fae" stroke-width="2"/>
+      <text x="385" y="205" font-size="10.5" font-weight="800" fill="#6d4fae" text-anchor="middle">SSTR 受体</text>
+      <!-- 胞内级联 -->
+      <text x="55" y="240" font-size="11.5" fill="#5c4d33">HI 时通道异常关闭 → 膜去极化 → Ca²⁺ 内流 → <tspan font-weight="800">胰岛素不停释放</tspan></text>
+      <circle cx="150" cy="278" r="17" fill="#fbeae7" stroke="#cf4d3c" stroke-width="1.6"/>
+      <text x="150" y="283" font-size="10" fill="#b8402f" text-anchor="middle">胰岛素</text>
+      <circle cx="300" cy="278" r="17" fill="#fbeae7" stroke="#cf4d3c" stroke-width="1.6"/>
+      <text x="300" y="283" font-size="10" fill="#b8402f" text-anchor="middle">胰岛素</text>
+      <text x="380" y="283" font-size="10.5" fill="#99886a">↑ 分泌过多</text>
+      <!-- 药物箭头 -->
+      <g>
+        <rect x="40" y="360" width="150" height="66" rx="10" fill="#fdf3e0" stroke="#b45309" stroke-width="2"/>
+        <text x="115" y="382" font-size="12.5" font-weight="800" fill="#8a4307" text-anchor="middle">二氮嗪（一线治本）</text>
+        <text x="115" y="400" font-size="10.5" fill="#5c4d33" text-anchor="middle">打开 K-ATP → K⁺ 外流</text>
+        <text x="115" y="416" font-size="10.5" fill="#5c4d33" text-anchor="middle">→ 超极化 → 停止分泌</text>
+        <line x1="115" y1="358" x2="128" y2="222" stroke="#b45309" stroke-width="2" marker-end="url(#arr7)"/>
+      </g>
+      <g>
+        <rect x="210" y="360" width="150" height="66" rx="10" fill="#efe9f9" stroke="#6d4fae" stroke-width="2"/>
+        <text x="285" y="382" font-size="12.5" font-weight="800" fill="#6d4fae" text-anchor="middle">奥曲肽（二线）</text>
+        <text x="285" y="400" font-size="10.5" fill="#5c4d33" text-anchor="middle">激动 SSTR → ↓cAMP ↓Ca²⁺</text>
+        <text x="285" y="416" font-size="10.5" fill="#5c4d33" text-anchor="middle">→ 抑制分泌（易快速耐受）</text>
+        <line x1="285" y1="358" x2="378" y2="222" stroke="#6d4fae" stroke-width="2" marker-end="url(#arr7)"/>
+      </g>
+      <g>
+        <rect x="380" y="98" width="0" height="0" fill="none"/>
+        <text x="240" y="128" font-size="11" fill="#8a4307" font-weight="700">ATP 使通道关闭（生理）；HI 时「关了就不开」——</text>
+        <text x="240" y="146" font-size="11" fill="#8a4307" font-weight="700">二氮嗪把它重新撬开</text>
+      </g>
+      <!-- 肝 -->
+      <rect x="475" y="52" width="255" height="150" rx="14" fill="#e6f4eb" stroke="#2e9e5b" stroke-width="1.8"/>
+      <text x="493" y="76" font-size="13" font-weight="800" fill="#1f7a45">肝细胞</text>
+      <text x="493" y="98" font-size="12" fill="#3a6a4d">胰高糖素（桥接）→</text>
+      <text x="493" y="120" font-size="12" font-weight="700" fill="#1f7a45">糖原分解 ＋ 糖异生</text>
+      <text x="493" y="140" font-size="12" fill="#3a6a4d">→ 葡萄糖入血（不动 β 细胞）</text>
+      <text x="493" y="164" font-size="10.5" fill="#6a8a75">依赖肝糖原储备：</text>
+      <text x="493" y="181" font-size="10.5" fill="#6a8a75">SGA / IUGR 储备差 → 效果差</text>
+      <!-- 肾 -->
+      <rect x="475" y="222" width="255" height="100" rx="14" fill="#e2f2f6" stroke="#0e7490" stroke-width="1.8"/>
+      <text x="493" y="246" font-size="13" font-weight="800" fill="#0e7490">肾远曲小管</text>
+      <text x="493" y="268" font-size="12" fill="#33626e">双克（氢氯噻嗪）→</text>
+      <text x="493" y="288" font-size="12" font-weight="700" fill="#0e7490">Na⁺-Cl⁻ 重吸收 ↓ → 排钠排水</text>
+      <text x="493" y="308" font-size="10.5" fill="#5a808a">对抗二氮嗪水潴留 ＋ 轻度升糖（协同）</text>
+      <text x="30" y="452" font-size="11" fill="#99886a">记忆锚：二氮嗪治「泵」，双克治「水」，奥曲肽替补「泵」，胰高糖素直接向肝「要糖」。</text>
+    </svg>
+    <div class="cap"><b>图4 · HI 药物作用位点。</b>二氮嗪打开被异常关闭的 K-ATP 通道（治本），代价是水钠潴留（FDA 曾就肺动脉高压发安全公告）；双克利尿对冲＋协同升糖；奥曲肽走受体通路压分泌，是二线；胰高糖素绕开 β 细胞直接动员肝糖原，只桥接、不治本。</div>
+  </div>
+
+  <div class="dcard c1">
+    <div class="dh">① 胰高糖素 —— 桥接，不治本<span class="sub">本院：GIR 升到 12 之前即开始</span></div>
+    <div class="db">
+      <ul>
+        <li><b>本院剂量</b>：<b>10–20 µg/kg/hr 持续输注</b>——在 GIR 加到 12 之前、高度怀疑 HI 时即开始，<b>早于 JHACH</b>（GIR &gt;10–12 才上）。</li>
+        <li><b>其他口径</b>：JHACH 固定 <b>1 mg/d</b>；CPS <b>10–30 µg/kg/hr</b>；抢救静推 <b>0.1–0.3 mg/kg</b>。</li>
+        <li><b>⚠️ 配伍红线</b>：只能用 <b>D5W（含糖液）</b>——遇生理盐水或含肝素溶液会<b>结晶</b>。</li>
+        <li><b>局限</b>：依赖肝糖原储备，<b>SGA / IUGR 储备差者效果差</b>；先天 HI 患儿胰高糖素反调节反应本身迟钝。</li>
+        <li><b>证据</b>：40 例重症先天 HI 回顾研究——输注 24h 内所需糖速降低 7.5 mg/kg/min，减少高浓糖/大液量需求；40% 出现不良事件（呼吸窘迫 19%、呕吐 13%、皮疹 2%），因果关系未确立。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="dcard c2">
+    <div class="dh">② 二氮嗪 —— 一线治本，唯一 FDA 批准<span class="sub">四条硬要求缺一不可</span></div>
+    <div class="db">
+      <ul>
+        <li><b>本院方案</b>：起始 <b>10 mg/kg/d 分 q8h</b>（3 次/日，比国际常用 BID 更平稳）＋<b>双克 5 mg/kg/d q12h</b>；每 <b>48h 加 2.5 mg/kg/d</b>，最大 <b>15 mg/kg/d</b>；确诊 HI 可早期应用。</li>
+        <li><b>国际口径</b>：5–15 mg/kg/d 分 BID/TID（中国 2021 共识 5–20 分 3 次）；<b>2–4 天起效，约 7 天最大剂量无效即停</b>，不要恋战。</li>
+        <li><b>四条硬要求（2020 国际共识）</b>：① <b>联用噻嗪类利尿剂</b>；② <b>总液量 &lt;150 mL/kg/d</b>；③ <b>用药前基线 ECHO</b>；④ <b>监测 CBC、尿酸</b>（基线＋开始治疗后 5–7 天复查 ECHO/CBC/尿酸）。</li>
+        <li><b>围生期应激型 HI</b>：若其他方式能维持血糖，<b>强烈建议推迟到生后 7–10 天再用</b>（尤其合并呼吸窘迫、早产、SGA、IDM；GRADE 2++）。</li>
+        <li><b>不良反应账本（295 例回顾）</b>：水肿 18%、中性粒细胞减少 15.6%（&lt;1500/µL）、高尿酸 5%、<b>肺动脉高压 2.4%</b>。FDA 2015 安全公告：11 例婴儿用药后出现肺动脉高压，<b>停药后全部缓解或改善</b>；PH 者胎龄更小、危险因素更多。合并肺发育不良、心肌病或明显结构心脏病者，<b>治疗前先请心内会诊</b>。</li>
+        <li><b>流程要求</b>：仅在与儿科内分泌医生会诊后开具（GRADE 1+）。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="redbox">
+    <div class="t">⚠️ 本院流程未明确写、但必须补上的两条（2020 共识硬要求）</div>
+    <b>① 二氮嗪用药前基线 ECHO</b>（筛肺动脉高压/心肌病，5–7 天复查）；<b>② 液体限制 &lt;150 mL/kg/d</b>（二氮嗪减少钠水排泄，水肿在即）。这两条请随医嘱落地，详见第⑫页差异清单。
+  </div>
+
+  <div class="dcard c3">
+    <div class="dh">③ 奥曲肽 —— 二线，两个硬伤<span class="sub">本院：停二氮嗪＋双克时换入</span></div>
+    <div class="db">
+      <ul>
+        <li><b>本院方案</b>：二氮嗪<b>最大量用满 5 天</b>仍 BG &lt;2.7 或 48h 两次 2.7–3.4，<b>或出现肺水肿</b> → 停二氮嗪及双克，奥曲肽 <b>15 µg/kg/d 分 q8h</b> 起；每 <b>3 天加 5</b>，最大 <b>30 µg/kg/d</b>。</li>
+        <li><b>国际口径</b>：5–25 µg/kg/d 分 q6–8h。</li>
+        <li><b>硬伤①</b>：<b>快速耐受</b>——治疗失败很常见，是它只能当二线的根本原因。</li>
+        <li><b>硬伤②</b>：多个病例系列/报告提示<b>小婴儿 NEC 风险</b>；中国 2021 共识：<b>不推荐新生儿期常规使用</b>。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="redbox">
+    <div class="t">不推荐常规用于 HI 的三种药（别在会诊单上看到就照开）</div>
+    <b>糖皮质激素</b>——PES 明确不鼓励：对 HI 不是有效治疗，徒增医源性肾上腺功能不全、高血压、骨脱矿风险；<b>硝苯地平</b>——钙通道阻滞剂在婴儿人群疗效有限；<b>西罗莫司</b>——mTOR 抑制剂，早期个案报道后，后续研究未能证实疗效。
+  </div>
+
+  <div class="purplebox">
+    <div class="t">基因与外科：阶梯的天花板</div>
+    <ul>
+      <li><b>换用奥曲肽的同时做基因检测</b>：患儿及父母 <b>ABCC8 ＋ KCNJ11</b>（K-ATP 通道基因）——结果决定是局灶还是弥漫、能不能手术治愈。</li>
+      <li>奥曲肽最大量仍无效 → <b>¹⁸F-DOPA PET 扫描</b>（定位局灶病灶）＋ <b>外科会诊</b>。</li>
+      <li>先天性 HI（K-ATP 通道型等）可能需长期用药，撤药与手术决策交内分泌/遗传专科（第⑨页）。</li>
+    </ul>
+  </div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>先桥接（胰高糖素）再治本（二氮嗪）后二线（奥曲肽）；二氮嗪四件事——ECHO、双克、限液 150、查血尿酸。</div>
+
+</section>
+
+<!-- ================= 页8 其他病因 ================= -->
+<section class="card page" id="page8">
+
+  <div class="card-head"><span class="step-no blue">⑧</span><h2>其他病因：垂体 · 代谢 · 围生期应激</h2></div>
+  <p class="card-sub">HI 之外还有两个方向（垂体-肾上腺、代谢病），以及最容易被忽略的一类：<b>围生期应激型暂时性 HI</b>——它是最常见的暂时性 HI，多数自己会好，关键是「等它好」期间别让脑断粮、别过早用二氮嗪。</p>
+
+  <div class="tri">
+    <div class="tricard mid">
+      <div class="th">围生期应激型 HI（最常见）</div>
+      <div class="bd"><ul>
+        <li><b>原因</b>：早产、IDM、IUGR、出生窒息、母亲子痫前期/高血压、胎粪吸入、先天性心脏病。</li>
+        <li><b>病程</b>：通常<b>数天至数周自行缓解</b>。</li>
+        <li><b>策略</b>：先静脉糖＋胰高糖素桥接；<b>二氮嗪尽量推迟到 7–10 天后</b>——多数「应激」会自己退场，别让药比病活得久。</li>
+      </ul></div>
+    </div>
+    <div class="tricard low">
+      <div class="th">垂体 / 肾上腺功能低下</div>
+      <div class="bd"><ul>
+        <li><b>线索</b>：皮质醇 &lt;10、GH &lt;7；小阴茎、唇腭裂等中线缺陷、身材矮小更支持。</li>
+        <li><b>确诊</b>：皮质醇低者<b>先做 ACTH 兴奋试验</b>，再诊断肾上腺皮质功能不全。</li>
+        <li><b>治疗</b>：氢化可的松 <b>5 mg/kg q12h 静滴</b>，或泼尼松 1–2 mg/kg/d；GH 缺乏者内分泌评估。</li>
+      </ul></div>
+    </div>
+    <div class="tricard high">
+      <div class="th">遗传代谢病</div>
+      <div class="bd"><ul>
+        <li><b>糖原贮积病</b>：反复低血糖＋乳酸升高＋<b>肝大</b> → 生玉米淀粉饮食。</li>
+        <li><b>脂肪酸氧化缺陷</b>：低酮性低血糖＋酰基肉碱异常 → <b>避免空腹</b>。</li>
+        <li><b>方向</b>：均需代谢/遗传专科接管；本院血氨、串联质谱可按需送（不必卡低血糖时点）。</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="bluebox">
+    <div class="t">病史＋查体：几分钟内锁定方向（JHACH 口径）</div>
+    <b>病史</b>：低血糖发生时间及其与喂养的关系、出生体重、胎龄、已知的持续低血糖危险因素（家族史、母亲用药、围生期应激）。<b>查体找三样</b>：① 垂体功能低下证据（小阴茎、唇腭裂、身材矮小）；② <b>肝大</b>（糖原贮积）；③ Beckwith–Wiedemann 综合征（脐膨出、偏侧肥大、巨舌）。<b>综合征谱</b>：BWS 是与 HI 最常见相关的综合征；Turner、Soto、Kabuki 亦相关。
+  </div>
+
+  <div class="hospbox">
+    <div class="t">🏥 本院流程如何覆盖「应激型自愈」</div>
+    流程图明确：<b>24h 内血糖均 ≥3.5 → 不考虑高胰岛素血症</b>，按过渡期处理——这一条实际上就是围生期应激型 HI 自然缓解的 Bedside 版本：能在 24h 内自己稳住的孩子，不需要进入药物阶梯；稳不住的，才沿 GIR 阶梯往上走。
+  </div>
+
+  <div class="purplebox">
+    <div class="t">为什么病因学这么要紧：不是「查着玩」</div>
+    HI 患儿<b>神经发育迟缓发生率高达 30%–50%</b>——而且不只见于先天性 HI，暂时性原因所致 HI 同样高发。不同病因的治疗和随访完全不同：应激型等自愈、HI 型上药、垂体型激素替代、代谢病管饮食——<b>方向错了，越努力越错</b>。这就是第⑥页那六管标本值回票价的地方。
+  </div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>应激型等自愈（药别抢跑），垂体型补激素（先 ACTH），代谢病管喂养（肝大想 GSD）。</div>
+
+</section>
+
+<!-- ================= 页9 撤药 ================= -->
+<section class="card page" id="page9">
+
+  <div class="card-head"><span class="step-no orange">⑨</span><h2>撤糖撤药：三步法与两个补充</h2></div>
+  <p class="card-sub">本院流程对<b>静脉糖和胰高糖素</b>的撤药写得很细，但<b>没有写二氮嗪和奥曲肽怎么撤</b>——这是原流程最大的缺口。本页先忠实呈现本院三步法，再用 ⚠️ 补充两个口服/二线药的撤药方案（引用前请科内确认）。</p>
+
+  <h3>撤药前提（满足任一即可开始）</h3>
+  <div class="vargrid t3">
+    <div class="vartile d"><div class="vh">条件一</div><div class="vq">总糖速 <b>&lt;12 mg/kg/min</b>，且 <b>24h 内所有血糖</b>在正常范围（3.5–6.0 mmol/L）。</div></div>
+    <div class="vartile d"><div class="vh">条件二</div><div class="vq">糖速仍 <b>≥12 mg/kg/min</b>，但 <b>48h 内所有血糖</b>正常（降得快不如降得稳）。</div></div>
+    <div class="vartile e"><div class="vh">条件三</div><div class="vq">24h 内出现<b>一次以上血糖 &gt;6 mmol/L</b>——提示当前糖速偏多，本身就是下调信号。</div></div>
+  </div>
+
+  <h3>本院撤药三步法</h3>
+  <div class="steps">
+    <div class="steprow"><span class="no">1</span><div class="bd"><b>先把静脉糖速降到 10 mg/kg/min 以下</b><br>• 高浓度葡萄糖溶液者，<b>糖浓度应尽快下降</b>；• 血糖正常时，每 12h 降糖速 <b>1 mg/kg/min</b>；• 降速中：BG <b>&lt;2.7 → 立即加回</b>；BG 2.7–3.4 → <b>维持此糖速 24h</b>，之后全部 ≥3.5 → 改为每 12h 降 <b>0.5</b>，之后仍 &lt;3.5 → 加回。</div></div>
+    <div class="steprow"><span class="no">2</span><div class="bd"><b>第二步：减胰高糖素</b><br>• 血糖正常时，每 12h 降输注速率 <b>0.2 mL（20%）</b>；• BG &lt;2.7 → 加回；BG 2.7–3.4 → 维持 24h，之后全 ≥3.5 → 每 12h 降 <b>0.1 mL（10%）</b>，仍 &lt;3.5 → 加回；• 胰高糖素因低血糖降不下来、同时有 HI 证据 → <b>考虑应用二氮嗪</b>（见第⑦页）。</div></div>
+    <div class="steprow"><span class="no">3</span><div class="bd"><b>第三步：从 10 mg/kg/min 继续降静脉糖速</b><br>• 血糖正常时，每 12h 降 <b>2 mg/kg/min</b>（比第一步快——已在安全范围，且喂养已建立，不必磨蹭）。</div></div>
+  </div>
+
+  <div class="pt red"><b>反跳规则统一记：</b>&lt;2.7 → 回退到上一档；2.7–3.4（灰区）→ 原地站 24h 再看。撤药期监测跟着撤药节奏走，不是一天一测。</div>
+
+  <div class="amberbox">
+    <div class="t">⚠️ 本院流程缺失 · 补充建议①：二氮嗪怎么撤</div>
+    二氮嗪半衰期 <b>9.5–24h</b>，是长效药，<b>撤必须慢</b>，否则反跳性低血糖。建议方案：<br>
+    <b>① 前提</b>：静脉糖已完全停用、全肠内喂养建立、血糖连续稳定 48–72h（目标范围内）；<br>
+    <b>② 节奏</b>：每 <b>3–5 天减一次</b>，每次减 <b>2.5–5 mg/kg/d</b>（不超过当前剂量的 1/3）；<br>
+    <b>③ 监测</b>：减量期增加血糖监测（<b>餐前＋睡前＋夜间</b>）；出现 BG &lt;3.5 或反复 &lt;2.7 → <b>暂停减量并评估</b>；<br>
+    <b>④ 双克同步</b>：可同步或稍后减，注意观察水钠潴留反跳；<br>
+    <b>⑤ 围生期应激型 HI</b>：常在生后 <b>2–4 周</b>可尝试停药，停药前最好做一次 <b>4–6h 禁食试验</b>确认；<br>
+    <b>⑥ 先天性 HI</b>（K-ATP 通道型等）：可能需长期用药，撤药需内分泌/遗传专科评估，部分患儿需手术。
+  </div>
+
+  <div class="amberbox">
+    <div class="t">⚠️ 本院流程缺失 · 补充建议②：奥曲肽怎么撤</div>
+    奥曲肽是二线桥接药，通常在<b>二氮嗪起效后</b>或<b>准备手术前</b>撤：<br>
+    <b>①</b> 二氮嗪已达有效剂量、血糖稳定 <b>24–48h</b> 后，开始减奥曲肽；<br>
+    <b>②</b> 每 <b>12–24h 减 5 µg/kg/d</b>，监测血糖反跳；<br>
+    <b>③</b> 减量中反跳 &lt;2.7 → 暂停减量，评估二氮嗪是否需加量；<br>
+    <b>④</b> 手术前：<b>术前 6–12h 停用</b>奥曲肽（避免术中低血糖难以纠正），术中用静脉糖维持。
+  </div>
+
+  <h3>撤药失败怎么办（反复 &lt;2.7 或 48h 两次 2.7–3.4）</h3>
+  <ol>
+    <li><b>立即恢复</b>到上一个稳定的糖速 / 药物剂量——失败第一步永远是回退，不是硬扛；</li>
+    <li><b>评估喂养</b>是否充足（热卡、喂养间隔），优先强化喂养——很多「撤药失败」其实是「喂养没跟上」；</li>
+    <li>已撤到口服药仍反复 → <b>重新评估 HI 类型</b>（暂时性 vs 先天性），请内分泌会诊；</li>
+    <li>先天性 HI 撤药失败 → 基因检测（ABCC8/KCNJ11）、¹⁸F-DOPA 定位、外科评估。</li>
+  </ol>
+
+  <h3>撤药中的喂养配合：撤药不是减药，是喂训</h3>
+  <div class="bluebox">
+    <div class="t">三条配合动作</div>
+    <ul>
+      <li><b>加</b>：撤静脉糖的同时，逐步增加肠内喂养量和热卡密度（母乳强化剂 / 早产儿配方）——静脉让出的糖，肠道要接得住；</li>
+      <li><b>拉</b>：逐步延长喂养间隔（q3h → q4h），<b>训练空腹耐受</b>——最终要靠自己的糖原＋糖异生撑过夜间；</li>
+      <li><b>盯</b>：目标 = 全肠内喂养、能耐受 q3–4h 喂养间隔、<b>餐前血糖 ≥3.5</b>。三条都到，撤药才叫完成。</li>
+    </ul>
+  </div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>静脉糖三步走（降1→撤高糖素→降2），口服药三五个天一动；&lt;2.7 回退、灰区站 24 小时。</div>
+
+</section>
+
+<!-- ================= 页10 出院随访 ================= -->
+<section class="card page" id="page10">
+
+  <div class="card-head"><span class="step-no">⑩</span><h2>出院前评估与出院后管理</h2></div>
+  <p class="card-sub">出院前回答一个问题：<b>「这孩子离开静脉糖，自己扛得住多久？」</b>答案由 6 小时安全禁食试验给出。</p>
+
+  <h3>安全禁食试验：谁要做、怎么做</h3>
+  <ul class="chk">
+    <li>需要糖速 <b>&gt;10 mg/kg/min</b> 才能维持正常血糖者（本院阶梯起步档之上）；</li>
+    <li>需要 <b>二氮嗪 / 胰高糖素</b>维持者；</li>
+    <li>出院需要<b>更高热量</b>配方者；</li>
+    <li>需要<b>延长持续糖输注</b>者。</li>
+  </ul>
+  <div class="fx"><b>方案</b>：禁食 <b>≥6 小时</b>，<b>每 1 小时测血糖</b>一次；全程 &gt;60 mg/dL（&gt;3.3 mmol/L）为「通过」——通过值即该患儿的安全喂养间隔。</div>
+  <div class="hospbox">
+    <div class="t">🏥 本院口径</div>
+    任何需糖速 &gt;10 mg/kg/min 维持正常血糖的患儿，出院前需接受空腹试验——<b>空腹 6h、每 1h 监测血糖</b>，以决定其安全的空腹间隔；试验中血糖 <b>&lt;3.5 mmol/L 立即停止试验</b>（终止阈值比国际常用的 3.3 <b>更严格</b>，与本院目标下限一致）。终止后按低血糖处理并顺延评估。
+  </div>
+  <div class="amberbox">
+    <div class="t">⚠️ 原流程未写 · 补充：通过 / 不通过分别怎么办</div>
+    <b>通过</b> → 可安排出院；按「安全空腹间隔」定喂养计划；带药者完成家庭教学（JHACH：通过者不需要居家教学与物资）。<br>
+    <b>不通过</b> → 重新评估病因（回第⑥页）、延长住院、持续糖输注下调失败者考虑带泵出院，或转内分泌/外科路径（第⑦页基因与外科）。
+  </div>
+
+  <h3>带药出院的家庭管理（内分泌团队负责的四件套）</h3>
+  <ul class="chk">
+    <li><b>① 血糖仪</b>——家庭监测的硬件底线；</li>
+    <li><b>② 测糖频率</b>：通常餐前＋睡前，稳定后延长；</li>
+    <li><b>③ 正常血糖范围</b>：家长手里要有一张「多少算低、多少要打电话」的数字卡；</li>
+    <li><b>④ 急救药及教学</b>：HI 用<b>胰高糖素</b>、肾上腺皮质功能不全用 <b>Solu-Cortef（氢化可的松应急）</b>——教会家长肌注/使用方法，并做演练。</li>
+  </ul>
+
+  <h3>长期随访</h3>
+  <div class="redbox">
+    <div class="t">一个必须写进出院记录的数字</div>
+    HI 患儿<b>神经发育迟缓发生率 30%–50%</b>——不仅见于先天性 HI，暂时性原因所致 HI 同样高发。<b>定期神经发育评估</b>要写进随访计划；先天性 HI 需遗传咨询＋内分泌长期随访；<b>局灶型 HI 术后需监测糖尿病风险</b>（相邻正常胰岛在手术中的取舍会影响糖代谢）。
+  </div>
+
+  <h3>喂养量化：奶里的「糖速」怎么算（肠内 GIR）</h3>
+  <div class="fx"><b>奶中糖速（mg/kg/min）＝ 奶中葡萄糖含量(g/dL) × 奶量(mL/kg/d) ÷ 144</b><br>母乳 / 足月儿配方 ≈ <b>7.1 g/dL</b>；早产儿配方（20 kcal/oz）≈ <b>8.5 g/dL</b>（JHACH 口径）</div>
+  <div class="tscroll">
+    <table class="slim">
+      <thead><tr><th>奶量 mL/kg/d</th><th class="num">母乳 / 足月奶 7.1</th><th class="num">早产奶 8.5</th><th>对照</th></tr></thead>
+      <tbody>
+        <tr><td class="num">120</td><td class="num">5.9</td><td class="num">7.1</td><td rowspan="3">全肠内 150 mL/kg/d 母乳 ≈ GIR 7.4，早产奶 ≈ 8.9——<b>这就是撤静脉糖时「肠道接得住」的数学底气</b>；不够就强化热卡，而不是赖着静脉。</td></tr>
+        <tr><td class="num">150</td><td class="num">7.4</td><td class="num">8.9</td></tr>
+        <tr><td class="num">180</td><td class="num">8.9</td><td class="num">10.6</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>出院关口六小时，每小时一测，全程 3.3 以上（本院 &lt;3.5 即停）；带药出院四件套，急救药必须教会。</div>
+
+</section>
+
+<!-- ================= 页11 剂量速查 ================= -->
+<section class="card page" id="page11">
+
+  <div class="card-head"><span class="step-no green">⑪</span><h2>剂量速查（床旁对照卡）</h2></div>
+  <p class="card-sub">全部药物一张表，本院口径在前、国际口径在括号。使用前<b>双人核对</b>；具体患儿以医嘱与上级意见为准。</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>药物 / 项目</th><th>剂量与用法</th><th>口径来源</th><th>关键提醒</th></tr></thead>
+      <tbody>
+        <tr><td><b>10% 葡萄糖 bolus</b></td><td class="num"><b>2 mL/kg</b> iv ≥5 min<br>（＝200 mg/kg）</td><td><span class="tag hosp">本院</span><span class="tag grey">全球一致</span></td><td>推完<b>立即接持续输注</b>；不用 D25/D50 高渗糖推注（补充口径）</td></tr>
+        <tr><td><b>持续输注起始</b></td><td class="num"><b>GIR 10</b> mg/kg/min<br>（全球 5–8；D10W 80–100 mL/kg/d）</td><td><span class="tag hosp">本院</span></td><td>GIR 10 常需加浓（D12–D15，见第⑤页）</td></tr>
+        <tr><td><b>GIR 递增</b></td><td class="num">每次 <b>+1–2</b>；本院 10→12→15→18 跳档</td><td><span class="tag grey">全球</span><span class="tag hosp">本院</span></td><td>升档触发：一次 &lt;2.7 或 48h 两次 2.7–3.4</td></tr>
+        <tr><td><b>40% 葡萄糖凝胶</b></td><td class="num"><b>0.5 mL/kg</b> 颊黏膜＋即喂奶</td><td><span class="tag grey">CPS/NICE 一线</span></td><td><b>本院流程未纳入</b>；30 min 复查</td></tr>
+        <tr><td><b>胰高糖素（持续）</b></td><td class="num"><b>10–20 µg/kg/hr</b>（JHACH 1 mg/d；CPS 10–30 µg/kg/hr）</td><td><span class="tag hosp">本院</span></td><td>高度怀疑 HI 即开始（GIR 12 之前）；<b>只能配 D5W</b>（盐水/肝素结晶）；SGA 效果差</td></tr>
+        <tr><td><b>胰高糖素（静推）</b></td><td class="num"><b>0.1–0.3 mg/kg</b></td><td><span class="tag grey">全球</span></td><td>桥接急救用；注意反跳</td></tr>
+        <tr><td><b>胰高糖素刺激试验</b></td><td class="num"><b>1 mg</b> IV/IM/SQ，q10min 测糖 ×4</td><td><span class="tag grey">JHACH</span></td><td>升幅 &gt;30 mg/dL 为阳性；作用约 60 min，可反跳</td></tr>
+        <tr><td><b>二氮嗪</b></td><td class="num"><b>10 mg/kg/d 分 q8h</b> 起，每 48h +2.5，<b>最大 15</b><br>（国际 5–15 BID/TID；中国 5–20 tid）</td><td><span class="tag hosp">本院</span></td><td><b>四条硬要求</b>：联用双克、液量 &lt;150、基线 ECHO、CBC＋尿酸（5–7 天复查）；2–4 天起效，7 天最大量无效即停；应激型推迟 7–10 天</td></tr>
+        <tr><td><b>氢氯噻嗪（双克）</b></td><td class="num"><b>5 mg/kg/d 分 q12h</b></td><td><span class="tag hosp">本院</span></td><td>与二氮嗪同步起始；利尿对冲水潴留＋协同升糖</td></tr>
+        <tr><td><b>奥曲肽</b></td><td class="num"><b>15 µg/kg/d 分 q8h</b> 起，每 3 天 +5，<b>最大 30</b><br>（国际 5–25 µg/kg/d q6–8h）</td><td><span class="tag hosp">本院</span></td><td>触发：二氮嗪最大量 5 天仍触发或肺水肿 → 停二氮嗪＋双克；硬伤：快速耐受、NEC 风险（中国 2021 不推荐新生儿期常规）</td></tr>
+        <tr><td><b>氢化可的松</b></td><td class="num"><b>5 mg/kg q12h</b> iv</td><td><span class="tag grey">全球</span></td><td>垂体/肾上腺功能低下替代；先 ACTH 兴奋试验确诊</td></tr>
+        <tr><td><b>泼尼松</b></td><td class="num"><b>1–2 mg/kg/d</b></td><td><span class="tag grey">全球</span></td><td>氢化可的松的口服替代选项</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>四张换算小卡（值班速用）</h3>
+  <div class="formgrid">
+    <div class="fcard"><div class="fh">① 单位换算</div><div class="fb"><div class="fx">mg/dL ＝ mmol/L × 18</div>锚点：1.4→25 · 2.6→47 · <b>2.7→49（本院诊断线）</b> · 3.3→60 · <b>3.5→63（目标下限）</b> · 3.9→70 · 6.0→108</div></div>
+    <div class="fcard"><div class="fh">② GIR 公式</div><div class="fb"><div class="fx">GIR ＝ 浓度(g/dL) × 速率(mL/kg/d) ÷ 144</div>例：D10W 100 → 6.9；D15 120 → 12.5；D20 80 → 11.1（全表见第⑤页）</div></div>
+    <div class="fcard"><div class="fh">③ 加浓配液（以 D10 为基液）</div><div class="fb"><div class="fx">D50 (mL) ＝（目标浓度−10）× 终体积 ÷ 40</div>每 100 mL：D12.5 加 6.25 mL；D15 加 12.5 mL；D20 加 25 mL（抽出等量再注入）</div></div>
+    <div class="fcard"><div class="fh">④ 奶中糖速（肠内 GIR）</div><div class="fb"><div class="fx">奶糖速 ＝ 糖(g/dL) × 奶量 ÷ 144</div>母乳/足月奶 7.1 g/dL、早产奶 8.5：150 mL/kg/d ≈ 7.4 / 8.9 mg/kg/min</div></div>
+  </div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>推糖 2 毫升、凝胶半毫升、高糖素 10–20 微克、二氮嗪 10 分三次、双克 5 分两次、奥曲肽 15 分三次。</div>
+
+</section>
+
+<!-- ================= 页12 对照·红线 ================= -->
+<section class="card page" id="page12">
+
+  <div class="card-head"><span class="step-no red">⑫</span><h2>全球对照 · 本院差异 · 床旁红线</h2></div>
+  <p class="card-sub">一页看全：全球各指南在本院坐标系里的位置，本院流程的 10 条差异（哪些是特色、哪些是缺口），以及 8 条不能碰的红线。</p>
+
+  <h3>全球指南速查总表（附录 A）</h3>
+  <div class="tscroll">
+    <table class="slim">
+      <thead><tr><th>维度</th><th>AAP 2011</th><th>PES 2015</th><th>CPS 2019</th><th>NICE/NHS</th><th>🏥 本院</th></tr></thead>
+      <tbody>
+        <tr><td><b>管哪段</b></td><td>过渡期 ≥34 周</td><td>持续 / 病理期</td><td>过渡＋持续</td><td>过渡期</td><td><b>持续期 ≥12h</b></td></tr>
+        <tr><td><b>干预线</b></td><td>0–4h &lt;25<br>4–24h &lt;35</td><td>0–48h &lt;50<br>&gt;48h &lt;60</td><td>&lt;2.6</td><td>&lt;2.6</td><td><b>&lt;2.7</b></td></tr>
+        <tr><td><b>目标</b></td><td class="num">45–50</td><td>HI &gt;70</td><td>过渡 ≥2.6<br>持续 ≥3.3</td><td>≥2.6</td><td><b>3.5–6.0</b></td></tr>
+        <tr><td><b>凝胶一线</b></td><td>未纳入</td><td>未强调</td><td>是（1b）</td><td>是</td><td><b>未纳入</b></td></tr>
+        <tr><td><b>IV 起始 GIR</b></td><td class="num">5–8</td><td class="num">5–8</td><td class="num">5.5</td><td>—</td><td><b>10</b></td></tr>
+        <tr><td><b>查因触发</b></td><td>—</td><td>&lt;50 留标本</td><td>≥72h &lt;2.8</td><td>—</td><td><b>一次 &lt;2.7 或 48h 两次 2.7–3.4</b></td></tr>
+        <tr><td><b>二氮嗪</b></td><td>—</td><td>一线</td><td>—</td><td>—</td><td><b>10 q8h ＋ 双克</b></td></tr>
+        <tr><td><b>出院禁食</b></td><td>—</td><td>建议</td><td>5–6h ≥3.3</td><td>—</td><td><b>6h，&lt;3.5 停止</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>本院 10 条差异清单（特色 vs 缺口）</h3>
+  <div class="tscroll">
+    <table class="slim">
+      <thead><tr><th>#</th><th>差异点</th><th>性质</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>GIR 起步直接到 10</td><td><span class="tag amber">特色·更积极</span></td><td>全球 5–8；需配加浓方案支撑</td></tr>
+        <tr><td class="num">2</td><td>BG &lt;3.5 即需喂养或治疗</td><td><span class="tag amber">特色·更积极</span></td><td>比全球干预线 2.6/50 更早动手</td></tr>
+        <tr><td class="num">3</td><td>48h 两次 2.7–3.4 灰区即升级</td><td><span class="tag green">特色·可操作</span></td><td>比单纯 GIR 触发更直观、更早</td></tr>
+        <tr><td class="num">4</td><td>胰高糖素 GIR 12 之前即启动</td><td><span class="tag amber">特色·更早</span></td><td>JHACH 为 GIR &gt;10–12 才上</td></tr>
+        <tr><td class="num">5</td><td>二氮嗪 10 q8h 分三次</td><td><span class="tag green">特色·更平稳</span></td><td>国际常用 BID；中国共识亦分 3 次</td></tr>
+        <tr><td class="num">6</td><td>HI 定义「不被抑制」即可</td><td><span class="tag green">特色·更宽松</span></td><td>不要求胰岛素 &gt;2，比 PES 宽</td></tr>
+        <tr><td class="num">7</td><td>禁食试验 &lt;3.5 终止</td><td><span class="tag green">特色·更严格</span></td><td>国际通过线 3.3，终止线本院更严</td></tr>
+        <tr><td class="num">8</td><td>葡萄糖凝胶未纳入</td><td><span class="tag red">缺口</span></td><td>CPS/NICE 一线（1b 级证据）；可科内讨论补充</td></tr>
+        <tr><td class="num">9</td><td>二氮嗪前 ECHO＋限液 &lt;150 未写</td><td><span class="tag red">缺口·必须补</span></td><td>2020 共识硬要求；肺动脉高压 2.4% 不是零</td></tr>
+        <tr><td class="num">10</td><td>二氮嗪/奥曲肽撤药方案未写</td><td><span class="tag red">缺口·已补</span></td><td>本指南第⑨页补充方案，引用前科内确认</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>八条床旁红线</h3>
+  <div class="redline"><span class="no">1</span><span><b>有症状或 &lt;1.4 mmol/L，不等喂养阶梯</b>——直接 D10W 2 mL/kg 静推 ≥5min，推完接维持。</span></div>
+  <div class="redline"><span class="no">2</span><span><b>关键标本必须在补糖之前留</b>（血糖 &lt;50 时）——胰岛素、酮体、FFA 补糖后全部失真。</span></div>
+  <div class="redline"><span class="no">3</span><span><b>诊断性判读必须用实验室血浆葡萄糖</b>——POCT 全血低约 15%，延迟每小时掉 6 mg/dL。</span></div>
+  <div class="redline"><span class="no">4</span><span><b>胰高糖素只能配 D5W</b>——遇生理盐水 / 肝素会结晶；配错泵即报废。</span></div>
+  <div class="redline"><span class="no">5</span><span><b>二氮嗪不裸奔</b>——开始前基线 ECHO、同步双克、液量 &lt;150 mL/kg/d、基线 CBC＋尿酸（本院流程未写，必须随医嘱补上）。</span></div>
+  <div class="redline"><span class="no">6</span><span><b>奥曲肽不是常规武器</b>——仅二氮嗪失败/肺水肿时用；快速耐受＋NEC 风险，中国共识不推荐新生儿期常规。</span></div>
+  <div class="redline"><span class="no">7</span><span><b>禁食试验 &lt;3.5 立即终止</b>（本院口径）——试验是找安全间隔，不是诱导低血糖发作。</span></div>
+  <div class="redline"><span class="no">8</span><span><b>带药出院必须完成四件套</b>——血糖仪、测糖频率、正常范围、急救药教学（胰高糖素 / Solu-Cortef），缺一不放。</span></div>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>本院三条「更」（起步更高、触发更早、阈值更严）＋三个缺口（凝胶、ECHO 限液、撤药）——用的时候知道自己在偏差的哪一侧。</div>
+
+</section>
+
+<!-- ================= 页13 JHACH 持续期路径全文 ================= -->
+<section class="card page doc" id="page13">
+
+  <div class="card-head"><span class="step-no blue">⑬</span><h2>附录：JHACH《新生儿延长性/持续性低血糖临床路径》全文汉化（2024-01）</h2></div>
+  <p class="card-sub">本页为源路径的<b>完整</b>汉化（不含删节），供溯源与科内引用；床旁速用请回第④–⑩页。</p>
+  <div class="src">原文：Johns Hopkins All Children's Hospital, Neonatal Prolonged Persistent Hypoglycemia Clinical Pathway, Updated January 2024. Owner &amp; Primary Author: Darah Yuhas, MD。</div>
+
+  <h4>原理（Rationale）</h4>
+  <p>本临床路径由 JHACH 新生儿科专家与儿科内分泌专家共识提出，旨在标准化持续性低血糖婴儿的临床处理。它解决以下临床问题：① 持续性低血糖的定义；② 关键标本的留取时机；③ 必需的关键标本项目；④ 高胰岛素血症的诊断；⑤ 高胰岛素血症的处理。</p>
+
+  <h4>背景（Background）</h4>
+  <p>低血糖在生后 48–72 小时内可为正常，因为新生儿正在从宫内生活过渡到宫外生活。AAP 发表的临床指南已标准化了这一过渡期的低血糖管理。然而，这些指南不涉及导致持续性低血糖的疾病的诊断与管理。将健康新生儿的生理性血糖调节与病理性低血糖区分开来，对于有效治疗、避免严重后果十分重要。</p>
+  <p><b>高胰岛素血症（HI）是持续性低血糖最常见的原因。</b>HI 可以是暂时性的，与围生期应激相关，也可以是某种潜在综合征的一部分，或是先天性的。新生儿暂时性 HI 的常见原因包括：早产、糖尿病母亲婴儿（IDM）、宫内生长受限（IUGR）、出生窒息、母亲子痫前期、先天性心脏病、胎粪吸入综合征。<b>Beckwith–Wiedemann 综合征是与 HI 最常见相关的综合征</b>，Turner、Soto 和 Kabuki 综合征也已知与 HI 相关。</p>
+  <p>胰岛素分泌失调会抑制对低血糖的反调节反应，并抑制酮体生成，而酮体是脑的关键替代燃料。<b>HI 患儿的神经发育迟缓发生率高达 30%–50%</b>——不仅见于先天性 HI 患儿，也见于较少见原因所致的 HI 患儿。及时识别与恰当处理是降低这些不良结局风险的关键。同样重要的是，将高胰岛素血症与其他较少见的持续性低血糖原因鉴别开来，如皮质醇和/或生长激素缺乏、糖原贮积病、糖异生缺陷和脂肪酸氧化缺陷。这些疾病有不同的治疗方法和长期随访要求，不在本路径范围内。</p>
+
+  <h4>已发表数据与证据水平</h4>
+  <p><b>I. 持续性低血糖的定义：</b></p>
+  <ol>
+    <li>GLOW 研究是一项前瞻性观察性研究，测定健康婴儿从出生到生后 120 小时的血浆葡萄糖浓度变化。前 18 小时平均血糖浓度增加并保持稳定（59±11 mg/dL；3.3±0.6 mmol/L），48 小时后保持稳定，在第 4 天升至新的平台（89±13 mg/dL；4.6±0.7 mmol/L）。结论：婴儿似乎在第 4 天完成向代谢的过渡。</li>
+    <li>在生后最初 48 小时内，很难将疑似持续性低血糖与过渡期新生儿血糖浓度区分开来，<b>诊断性评估应推迟到生后 2–3 天</b>。</li>
+    <li>根据 AAP 指南，如果在生后 24 小时内无法维持血糖 &gt;45 mg/dL，或以 5–8 mg/kg/min 的糖速仍不能维持，应考虑存在导致持续性低血糖的疾病。</li>
+    <li>目前的证据不支持存在一个特定的血糖浓度，低于该浓度就必然导致神经损伤。在较大儿童和成人中，血浆葡萄糖 &lt;55 mg/dL 时可出现神经症状，&lt;50 mg/dL 时可观察到认知功能损害。生后 48 小时后建议血糖 &gt;60 mg/dL。</li>
+  </ol>
+  <p><b>II. 持续性低血糖的检查：</b></p>
+  <ol>
+    <li><b>葡萄糖</b>：健康婴儿的葡萄糖稳态受到严格调节——血浆葡萄糖 &lt;85 mg/dL 时胰岛素水平开始下降；继续降至 &lt;65 mg/dL，反调节激素开始分泌；<b>血糖 &lt;50 mg/dL 时应留取关键标本</b>，以保证结果可判读。全血血糖值可能比血浆葡萄糖浓度低约 15%；由于红细胞糖酵解，延迟处理和检测可使血糖每小时下降多达 6 mg/dL。</li>
+    <li><b>关键标本</b>：回顾性研究（HI 患儿 vs 其他低血糖疾病患儿）显示——可检测到的胰岛素水平对诊断先天性高胰岛素血症有 <b>82% 的敏感性</b>（28 例中 23 例有可检测到的胰岛素，中位数 6.7 µIU/mL）；<b>β-羟丁酸 &lt;1.8 mmol/L 的敏感性为 100%</b>；<b>游离脂肪酸 &lt;1.7 mmol/L 的敏感性为 87%</b>。</li>
+    <li><b>胰高血糖素刺激试验</b>：胰高血糖素刺激糖原分解、从肝脏释放葡萄糖；低血糖时仍有糖原储备并出现阳性血糖反应，提示胰岛素过多是低血糖的原因。</li>
+  </ol>
+  <p><b>III. 高胰岛素血症的处理：</b></p>
+  <ol>
+    <li>根据 PES 共识指南，疑似先天性低血糖疾病的新生儿应维持血浆葡萄糖 &gt;70 mg/dL。从成人文献看，血浆葡萄糖约 55–65 mg/dL 时脑对葡萄糖的利用开始受限；在酮生成不足的疾病（如高胰岛素血症或脂肪酸氧化障碍）中，酮体和乳酸不能充分替代葡萄糖，<b>能量衰竭的风险更大</b>。</li>
+    <li>持续葡萄糖输注被推荐为持续性低血糖的<b>一线治疗</b>。输注的最大速率受限于不引起低钠血症和容量过负荷前提下的最大葡萄糖浓度与液体量。</li>
+    <li>当最大持续葡萄糖输注仍不能达到正常血糖，或不能停用葡萄糖输注时，可能需要加用药物。</li>
+  </ol>
+
+  <h4>二氮嗪：机制、安全信号与 2020 共识</h4>
+  <p>二氮嗪是<b>唯一获 FDA 批准</b>用于治疗高胰岛素性低血糖的药物。它是 ATP 敏感性钾通道的激活剂，可抑制胰腺 β 细胞释放胰岛素；它还减少钠和水的排泄，导致液体潴留，临床上可能很显著。</p>
+  <p>2015 年，FDA 发布安全公告：11 例接受二氮嗪治疗的婴儿出现<b>肺动脉高压</b>，所有病例在停用二氮嗪后均缓解或改善。一项 295 例接受二氮嗪治疗的回顾性研究：<b>18% 水肿、15.6% 中性粒细胞减少（&lt;1500/µL）、5% 高尿酸血症、2.4% 肺动脉高压</b>；被诊断为 PH 的婴儿出生胎龄更小、有更多潜在 PH 危险因素。2020 年，儿科内分泌学家工作组发布二氮嗪合理使用的专家共识实践指南（表 1）。</p>
+  <div class="tscroll">
+    <table class="slim">
+      <thead><tr><th>项目</th><th>推荐（GRADE 分级）</th></tr></thead>
+      <tbody>
+        <tr><td><b>适应证</b></td><td>确诊为胰岛素分泌过多所致的持续性新生儿低血糖，应考虑使用二氮嗪治疗。<b>1(++++)</b></td></tr>
+        <tr><td><b>围生期应激型 HI 何时用</b></td><td>如可通过其他方式维持正常血糖，应强烈考虑将二氮嗪推迟到生后 7–10 天，尤其合并呼吸窘迫、早产、SGA 或 IDM 者。<b>2(+%)→2(++)</b></td></tr>
+        <tr><td><b>剂量</b></td><td>5–15 mg/kg/day，分 2–3 次给药；起始剂量根据疑似病因和新生儿风险状况选择。<b>1(+++)</b></td></tr>
+        <tr><td><b>会诊</b></td><td>二氮嗪应仅在与儿科内分泌医生会诊后开具。<b>1(+)</b></td></tr>
+        <tr><td><b>液体管理</b></td><td>开始二氮嗪的同时开始噻嗪类利尿剂 <b>1(++++)</b>；总液体目标限制在 150 cc/kg/day 以下 <b>2(+)</b>。</td></tr>
+        <tr><td><b>PH 风险</b></td><td>考虑基线超声心动图 <b>2(++)</b>；肺发育不良、心肌病或明显结构性心脏病者，治疗前建议儿科心脏会诊 <b>1(++)</b>。</td></tr>
+        <tr><td><b>不良反应监测</b></td><td>监测液体过负荷和/或 PH 体征 <b>2(+++)</b>；开始治疗后 5–7 天考虑复查超声心动图 <b>2(+++)</b>；基线及 5–7 天获取 CBC <b>1(+++)</b>；基线及 5–7 天获取尿酸 <b>1(+++)</b>。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">表注：证据等级采用 GRADE 工作组框架。推荐强度 1（「我们推荐」）或 2（「我们建议」）；证据置信度分高（+++）、中（++）、低（+）、极低（+）。</p>
+
+  <h4>胰高血糖素与其他治疗选择</h4>
+  <p><b>胰高血糖素</b>：与具有同等程度低血糖的非高胰岛素血症患儿相比，先天性 HI 患儿的血清胰高血糖素反调节反应是迟钝的。40 例接受静脉胰高血糖素输注的重症先天 HI 回顾研究：开始输注后 24 小时内所需糖速降低 <b>7.5 mg/kg/min</b>，减少高容量液体或高葡萄糖浓度液体的使用；40% 出现不良事件（呼吸窘迫 19%、呕吐 13%、皮疹 2%），作者无法确定是否与输注直接相关；仅 1 例血小板减少（输注前已存在），无低钠血症病例。</p>
+  <p><b>奥曲肽</b>：被推荐为对二氮嗪无反应患儿的可能二线药物，但由于<b>快速耐受</b>，治疗失败很常见；多个病例系列/报告提示其使用与小婴儿<b>坏死性小肠结肠炎（NEC）</b>相关。<b>糖皮质激素</b>：PES 不鼓励使用——类固醇对 HI 不是有效治疗，并使婴儿暴露于医源性肾上腺功能不全、高血压和骨脱矿质。<b>硝苯地平</b>：钙通道阻滞剂在婴儿人群中疗效有限，不应用于 HI。<b>西罗莫司</b>：mTOR 抑制剂，曾被报道为新型治疗方法，但后续研究未能显示其疗效。</p>
+
+  <h4>临床管理（I–X）</h4>
+  <p><b>I. 持续性低血糖的诊断：</b>晚期早产儿和足月儿——生后 72 小时后血糖 &lt;60 mg/dL；早产儿——全肠内喂养下血糖 &lt;60 mg/dL 且出现 2 次以上。</p>
+  <p><b>II. 病史与体格检查：</b>病史包括低血糖发生的时间及其与喂养的关系、出生体重、胎龄和已知的持续性低血糖危险因素。体格检查包括任何垂体功能低下的证据（小阴茎、唇腭裂、身材矮小）、肝大，或 Beckwith–Wiedemann 综合征（脐膨出、偏侧肥大、巨舌）。</p>
+  <p><b>III. 关键标本的留取时机：</b>血糖 &lt;50 mg/dL 且存在以下情况时留取——① 临床关注遗传综合征、皮质醇缺乏、生长激素缺乏或代谢性疾病；② 婴儿 &gt;72 小时且需要糖速 &gt;10–12 mg/kg/min（即使有强烈的暂时性 HI 怀疑）；③ 早产儿在全肠内喂养下血糖 &lt;60 mg/dL × 2 次。</p>
+  <p><b>IV. 关键标本项目：</b>使用医嘱组「Pediatric Hypoglycemia Critical Sample Focused」，在血糖 &lt;50 mg/dL 时获取：血清葡萄糖、β-羟丁酸、胰岛素、皮质醇、游离脂肪酸和生长激素；尿有机酸可从尿袋标本获取；除非怀疑代谢性疾病，不常规开具乳酸或酰基肉碱谱。难以获取血液且无法开具所有化验时，<b>优先：葡萄糖 → β-羟丁酸 → 胰岛素 → 皮质醇</b>。</p>
+  <p><b>V. 关键标本解读：</b>见低血糖状态下关键标本预期值表（本指南第⑥页判读表）。皮质醇水平低（&lt;10 mcg/dL）者，建议在确诊肾上腺皮质功能不全之前进行 ACTH 刺激试验。注意电子病历系统中检验的参考范围——部分检测在低血糖状态下获得的值可能不适合直接判读。</p>
+  <p><b>VI. 胰高血糖素刺激试验：</b>指征——临床怀疑高胰岛素血症但血清胰岛素水平低，或无法获取关键标本时。方案——血糖 &lt;50 mg/dL 时给予胰高血糖素 1 mg IV/IM/SQ，随后每 10 分钟床旁测血糖 ×4 次；血糖升高 &gt;30 mg/dL 为阳性反应；作用持续约 60 分钟；给药后可能出现反跳性低血糖。</p>
+  <p><b>VII. 高胰岛素血症的诊断标准（血糖 &lt;50 mg/dL 时）：</b>① 胰岛素浓度不适当可检测到（&gt;2 µIU/mL）；② β-羟丁酸不适当抑制（&lt;1.8 mmol/L）；③ 游离脂肪酸不适当抑制（&lt;1.7 mmol/L）；④ 胰高血糖素刺激试验血糖反应 &gt;30 mg/dL。</p>
+  <p><b>VIII. 高胰岛素血症的处理：</b></p>
+  <ul>
+    <li><b>早产儿</b>：喂养调整——管饲者增加喂养时间和热量；按方案每 3 小时经口喂养一次；完全管饲者维持 q3h 管饲并增加热量。喂养调整后低血糖仍持续 → 开始含葡萄糖液体，维持血浆葡萄糖 &gt;70 mg/dL。无法停用含糖液体和/或在不使用胰高血糖素的情况下加浓喂养 → 咨询内分泌科。</li>
+    <li><b>晚期早产儿/足月儿</b>：开始含葡萄糖液体，按需增加糖速以达到目标 &gt;70 mg/dL；个体化基础上增加喂养量、强化和/或延长喂养时间；糖速已接近或达到最大值、或因容量限制和电解质紊乱受限 → 内分泌科会诊，讨论胰高血糖素和/或二氮嗪。</li>
+    <li><b>糖速计算（口服喂养近似值）</b>：[奶中葡萄糖含量（g/dL）× 速率（mL/kg/d）] ÷ 144。奶中乳糖/葡萄糖含量：母乳/足月儿配方 = 7.1 g/dL；早产儿配方 = 8.5 g/dL（基于 20 kcal/oz）。</li>
+    <li><b>胰高血糖素</b>：考虑使用时建议内分泌科医生在场。持续输注——固定剂量 1 mg/day；<b>唯一相容的静脉溶液是右旋糖（含糖液），在盐水或含肝素溶液中会结晶</b>。</li>
+    <li><b>二氮嗪</b>：获取基线超声心动图，有心脏病证据或肺动脉高压者未经心脏科会诊不得开始治疗；同时开始氯噻嗪/氢氯噻嗪；起始 5–15 mg/kg/day 分 BID；典型反应在 2–4 天内出现；约 7 天内最大剂量仍无效果则停用。</li>
+    <li><b>撤退</b>：胰高血糖素和/或二氮嗪的撤退策略与内分泌科医生讨论。</li>
+  </ul>
+  <p><b>IX. 会诊：</b>糖速达到最大值后、开始胰高血糖素或二氮嗪等药物之前，咨询内分泌科；关注与代谢或遗传综合征相关的低血糖，咨询代谢科/遗传科。</p>
+  <p><b>X. 出院规划：</b>出院前需要二氮嗪/胰高血糖素、因低血糖（非生长所需）需要更高热量、和/或需要延长持续葡萄糖输注的 HI 婴儿，出院前进行安全禁食试验：<b>至少禁食 6 小时，所有血糖 &gt;60 mg/dL</b>；通过者不需要居家教学或物资。带药回家者（如二氮嗪或氢化可的松）由内分泌科团队提供居家教学和物资：血糖仪；血糖检测频率；正常血糖范围；急救药物（HI 用胰高血糖素，肾上腺皮质功能不全用 Solu-Cortef）。</p>
+
+  <h4>路径总结表</h4>
+  <ul>
+    <li><b>持续性低血糖定义</b>：生后 72 小时后血糖 &lt;60 mg/dL（早产儿：全肠内喂养下 &lt;60 × 2 次）。</li>
+    <li><b>目标血清葡萄糖</b>：确诊 HI 者 &gt;70 mg/dL。</li>
+    <li><b>关键标本（血糖 &lt;50 mg/dL 时获取，括号为应见到）</b>：血清葡萄糖（&lt;50，确认真实）；β-羟丁酸（&gt;2 mmol/L）；胰岛素（&lt;2 µIU/mL）；游离脂肪酸（&gt;2 mmol/L）；皮质醇（&gt;10 mcg/dL）；生长激素（&gt;7 ng/mL）；乳酸（0.6–2 mmol/L）；尿有机酸常规；酰基肉碱谱不常规获取。</li>
+    <li><b>HI 诊断标准（血糖 &lt;50 时）</b>：β-羟丁酸 &lt;1.8；游离脂肪酸 &lt;1.7；胰岛素 &gt;2（可假阴性；β-OHB 与 FFA 最敏感）；胰高血糖素刺激反应 &gt;30 mg/dL。</li>
+    <li><b>HI 危险因素</b>：LGA；IDM；早产或过期产；围生期应激（出生窒息、母亲子痫前期、母亲高血压、胎粪吸入）；家族史或先天性综合征。</li>
+  </ul>
+
+</section>
+
+<!-- ================= 页14 JHACH 早期路径全文 ================= -->
+<section class="card page doc" id="page14">
+
+  <div class="card-head"><span class="step-no cyan">⑭</span><h2>附录：JHACH《新生儿低血糖：早期管理临床路径（CVICU）》全文汉化（2025-10）</h2></div>
+  <p class="card-sub">心脏重症监护室（CVICU）新生儿生后 48 小时内低血糖的标准化管理；含关键化验期望值表与四阶段流程。</p>
+  <div class="src">原文：Johns Hopkins All Children's Hospital – Heart Institute, Neonatal Hypoglycemia: Early Management Clinical Pathway (CVICU), Updated October 21, 2025. Owner: Reema Patel, MD。</div>
+
+  <h4>原理</h4>
+  <p>本路径由 JHACH 的医生、高级执业人员、护士和药师组成的共识小组制定，旨在标准化住院儿童低血糖的管理。新生儿低血糖是指血糖浓度低于新生儿脑正常功能所需的水平。根据 AAP 2011 年低血糖指南，健康新生儿在生后最初 1–2 小时内血糖水平可低至 30 mg/dL。生后最初数小时内的显著低血糖如果未被正确识别和及时处理，可能导致严重合并症并潜在引发惊厥。本指南旨在标准化<b>生后 48 小时内</b>发现的新生儿低血糖的临床管理和治疗。</p>
+
+  <h4>背景与诊断阈值</h4>
+  <p>新生儿过渡期低血糖在出生后长达 48 小时内可能是正常发现。临床显著低血糖是由于新生儿脑内葡萄糖供应不足所致。代谢状况、婴儿状况和母亲因素都会影响新生儿血浆葡萄糖稳态。虽然对于哪些阈值会导致长期后遗症尚无共识，但大多数指南的共识是：在大多数新生儿中，<b>尤其是高危新生儿，保持血糖水平 &gt;50 mg/dL</b>。过渡期后的低血糖阈值：<b>出生–4 小时 &lt;50 mg/dL；4–24 小时 &lt;55 mg/dL</b>。</p>
+
+  <h4>化验检查与关键化验表</h4>
+  <p>床旁血糖检测；代谢组（肾功能组 RFP 或完整代谢组 CMP）；关键标本化验（根据临床指征获取，见表 1）。</p>
+  <div class="tscroll">
+    <table class="slim">
+      <thead><tr><th>化验类别</th><th>血液检测</th><th class="num">血糖 &lt;50 mg/dL 时的正常值</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="4"><b>空腹关键化验（必需，血糖 &lt;50 mg/dL 时抽取）</b></td><td>血浆乳酸（关键）</td><td class="num">0.6–2 mmol/L</td></tr>
+        <tr><td>血浆胰岛素水平（关键）</td><td class="num">&lt;2 µIU/L</td></tr>
+        <tr><td>碳酸氢根（CMP）</td><td class="num">15–20 mmol/L</td></tr>
+        <tr><td>CMP</td><td class="num">实验室常规标准</td></tr>
+        <tr><td rowspan="9"><b>根据内分泌会诊指示需考虑的其他化验</b></td><td>β-羟丁酸（血清酮体）</td><td class="num">&gt;2 mmol/L</td></tr>
+        <tr><td>游离脂肪酸</td><td class="num">&gt;2 mmol/L</td></tr>
+        <tr><td>生长激素</td><td class="num">&gt;7 ng/mL</td></tr>
+        <tr><td>C 肽</td><td class="num">&lt;0.5 ng/mL</td></tr>
+        <tr><td>皮质醇</td><td class="num">&gt;10 mcg/dL</td></tr>
+        <tr><td>氨</td><td class="num">&lt;33 µmol/L</td></tr>
+        <tr><td>酰基肉碱谱、总及游离肉碱</td><td class="num">实验室常规标准</td></tr>
+        <tr><td>尿有机酸</td><td class="num">实验室常规标准</td></tr>
+        <tr><td>胰岛素样生长因子结合蛋白 1（IGFBP-1）</td><td class="num">&gt;180 ng/mL</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>临床管理：四阶段</h4>
+  <p><b>第 1 阶段 · 患者筛查：</b>评估所有在新生儿期入住 CVICU 的患者是否有发生低血糖的症状或危险因素。<b>典型症状</b>：抖动、易激惹、高调哭、呼吸暂停、发绀、不规则或快速呼吸、低张、惊厥、体温不稳定、喂养差。<b>危险因素</b>：SGA（体重 &lt;10 百分位）、LGA（&gt;90 百分位）、宫内生长受限史、IDM（尤其母亲 1 小时血糖筛查失败者）、早产儿（&lt;34 周）、晚期早产儿（34–36⁺⁶ 周）、先天性低血糖家族史、母亲用药（特布他林、β 受体阻滞剂、口服降糖药）、遗传综合征（Beckwith–Wiedemann、Turner）、中线缺陷、疑似败血症、低体温。</p>
+  <p><b>第 2 阶段 · 低血糖筛查：</b>出生后 1 小时内开始首次喂养（如果能喂养），喂养后 30 分钟用床旁 POCT 检测血糖。不能喂养者，应在出生后第 0 天开始以 80 mL/kg/day 输注 10% 葡萄糖（D10），并按 NICU 建议进阶；存在危险因素者，出生后 1 小时用 POCT 查血糖。</p>
+  <p><b>第 3 阶段 · 启动治疗：</b>出生后 1–4 小时：BG &gt;50 → 无需干预；BG 25–50 → 复喂并在喂养后 30 分钟复查；不能喂养者考虑 D10 IV 2 mL/kg 推注；BG &lt;25 → 给予 D10 IV 2 mL/kg 推注。考虑请新生儿科会诊；任何有严重症状（如嗜睡）且 BG ≤50 的患者，应考虑给予 D10 IV 治疗。</p>
+  <p><b>第 4 阶段 · 维持目标并安排检查：</b>下次喂养后 1 小时或开始静脉治疗后复查 BG，继续每 2 小时检查；<b>连续两次 &gt;50 mg/dL 后可停止检查</b>；&gt;24 小时者必须有连续两次 &gt;50 mg/dL。适当治疗超过 24 小时低血糖仍持续 → 考虑内分泌科会诊，同时获取关键化验（<b>在干预前血糖 &lt;50 mg/dL 时</b>）：血浆乳酸、血浆胰岛素、碳酸氢根、CMP、β-羟丁酸。<b>内分泌会诊的其他指征</b>：静脉输液 &gt;7 天；使用胰高血糖素；连续三次 BG &lt;45 mg/dL；遗传性低血糖家族史；疑似与低血糖相关的综合征（Beckwith–Wiedemann、Turner）。</p>
+
+  <h4>结局指标</h4>
+  <p>CVICU 新生儿低血糖发生率；因低血糖请新生儿科或内分泌科会诊率。</p>
+
+  <hr class="sep">
+
+  <h4>参考文献</h4>
+  <div class="ref"><div class="ref-t">1. Committee on Fetus and Newborn, Adamkin DH. Postnatal glucose homeostasis in late-preterm and term infants.</div><div class="ref-src">Pediatrics. 2011;127(3):575-579.</div></div>
+  <div class="ref"><div class="ref-t">2. Shah R, Harding J, Brown J, McKinlay C. Neonatal Glycaemia and Neurodevelopmental Outcomes: A Systematic Review and Meta-Analysis.</div><div class="ref-src">Neonatology. 2019;115(2):116-126.</div></div>
+  <div class="ref"><div class="ref-t">3. Rozance PJ, Hay WW Jr. New approaches to management of neonatal hypoglycemia.</div><div class="ref-src">Matern Health Neonatol Perinatol. 2016;2:3.</div></div>
+  <div class="ref"><div class="ref-t">4. van Kempen AAMW, Eskes PF, Nuytemans DHGM, et al. Lower versus Traditional Treatment Threshold for Neonatal Hypoglycemia.</div><div class="ref-src">N Engl J Med. 2020;382(6):534-544.</div></div>
+  <div class="ref"><div class="ref-t">5. Gray K, Dalrymple R, Brunton A. Lower glucose treatment threshold could be as safe as the traditional threshold in hypoglycaemic neonates.</div><div class="ref-src">Arch Dis Child Educ Pract Ed. 2021;106(4):255-256.</div></div>
+  <div class="ref"><div class="ref-t">6. Thompson-Branch A, Havranek T. Neonatal Hypoglycemia.</div><div class="ref-src">Pediatr Rev. 2017;38(4):147-157.</div></div>
+
+  <hr class="sep">
+
+  <h4>使用说明</h4>
+  <p>本手册整合全球指南并与本院流程对齐，所有阈值与剂量均标注来源。临床决策请结合患儿具体情况、本院最新版本及上级医师判断。<b>本手册不替代内分泌/新生儿专科会诊。</b></p>
+
+  <div class="mnbar"><span class="mn-k">记忆</span>两份 JHACH 路径一条主线：48 小时内看时龄喂＋测，48 小时后降不下来就查因——和本院流程是同一棵树。</div>
+
+</section>
+
+<footer class="foot">
+  新生儿低血糖 · 床旁住院医师指南（住院医师版）v1.0 · 2026-09-28 · 单文件离线可用 · 长图模式供微信分享<br>
+  内容整理自《新生儿低血糖临床决策手册（全球指南整合·贵院对齐版）》，急救判断前置重构；本院口径（&lt;2.7 诊断、3.5–6.0 目标、GIR 10→12→15→18 阶梯、撤药三步法、6h 禁食试验）原样保留；新增内容限于机制图 4 幅、换算表（mmol↔mg/dL、GIR 速查、加浓配液、奶中糖速）、判读表与床旁动作梳理；第⑨页二氮嗪/奥曲肽撤药方案、第⑩页禁食试验后续处置、第⑦页「四条硬要求」为源手册标注的本院流程缺失之补充建议，引用执行前请科内确认。<br>
+  本指南由 AI 参与整理生成，供科内住院医师床旁学习参考，<b>不构成医嘱</b>；所有药物使用前<b>双人核对</b>，临床决策以上级医师意见为准；与科室手册/共识冲突时，以手册与共识为准，并请反馈修订。
+</footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+var D = (typeof document !== 'undefined') ? document : null;
+var TOTAL = 14;
+
+function current(){
+  return parseInt(document.body.getAttribute('data-page')||'1',10) || 1;
+}
+window.goPage = function(n){
+  n = Math.max(1, Math.min(TOTAL, n|0));
+  document.body.setAttribute('data-page', String(n));
+  var pages = document.querySelectorAll('section.card.page');
+  for(var i=0;i<pages.length;i++){
+    pages[i].classList.toggle('active', pages[i].id === 'page'+n);
+  }
+  var tabs = document.querySelectorAll('nav.pager .ptab');
+  for(var j=0;j<tabs.length;j++){
+    tabs[j].classList.toggle('active', j === n-1);
+    if(j === n-1 && tabs[j].scrollIntoView){
+      try{ tabs[j].scrollIntoView({block:'nearest', inline:'nearest'}); }catch(e){}
+    }
+  }
+  var pind = document.getElementById('pind');
+  if(pind){ pind.textContent = n + '/' + TOTAL; }
+  window.scrollTo({top:0});
+};
+window.navRel = function(d){
+  window.goPage(current() + d);
+};
+window.jump = function(n){
+  if(document.body.classList.contains('longmode')){
+    var el = document.getElementById('page'+n);
+    if(el && el.scrollIntoView){ el.scrollIntoView(); }
+  } else {
+    window.goPage(n);
+  }
+};
+window.toggleLong = function(on){
+  document.body.classList.toggle('longmode', !!on);
+  if(on){
+    var pages = document.querySelectorAll('section.card.page');
+    for(var i=0;i<pages.length;i++){ pages[i].classList.add('active'); }
+  } else {
+    window.goPage(current());
+  }
+  window.scrollTo({top:0});
+};
+
+if(D){
+  /* 键盘翻页 */
+  document.addEventListener('keydown', function(e){
+    if(document.body.classList.contains('longmode')) return;
+    if(e && (e.key === 'ArrowRight' || e.key === 'PageDown')){ window.navRel(1); }
+    else if(e && (e.key === 'ArrowLeft' || e.key === 'PageUp')){ window.navRel(-1); }
+  });
+  /* 触屏横滑翻页 */
+  var tx = 0, ty = 0, tt = 0;
+  document.addEventListener('touchstart', function(e){
+    if(!e.touches || !e.touches.length) return;
+    tx = e.touches[0].clientX; ty = e.touches[0].clientY; tt = Date.now();
+  }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if(document.body.classList.contains('longmode')) return;
+    if(!e.changedTouches || !e.changedTouches.length) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    var dy = e.changedTouches[0].clientY - ty;
+    if(Date.now() - tt > 900) return;
+    if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5){
+      window.navRel(dx < 0 ? 1 : -1);
+    }
+  }, {passive:true});
+}
+})();
+</script>
+</body>
+</html>
